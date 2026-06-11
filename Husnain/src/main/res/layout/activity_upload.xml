@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="#F8F9FF">
+
+    <!--  ── TOP BAR ──  -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="52dp" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="18dp" android:paddingEnd="18dp" android:paddingTop="10dp" android:paddingBottom="8dp">
+        <!--  Back button  -->
+        <FrameLayout android:id="@+id/btnBack" android:layout_width="34dp" android:layout_height="34dp" android:background="#F3F4F6">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="←" android:textSize="16sp" android:textColor="#374151"/>
+        </FrameLayout>
+        <!--  Page title  -->
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="10dp" android:text="Upload Paper"  android:textSize="16sp" android:textColor="#0F1117"/>
+    </LinearLayout>
+    <!--  ── MAIN SCROLL CONTENT ──  -->
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingTop="14dp" android:paddingBottom="65dp" android:gravity="center_horizontal">
+            <!--  ── DROP ZONE ──  -->
+            <LinearLayout android:id="@+id/llDropZone" android:layout_width="match_parent" android:layout_height="218dp" android:layout_marginStart="18dp" android:layout_marginEnd="18dp" android:orientation="vertical" android:gravity="center" android:padding="28dp" android:background="#FFFFFF">
+                <TextView android:layout_width="44dp" android:layout_height="44dp" android:text="📤" android:textSize="44sp" android:gravity="center"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:text="Drop your PDF here"  android:textSize="15sp" android:textColor="#0F1117" android:gravity="center"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Supports .pdf up to 50 MB"  android:textSize="12sp" android:textColor="#6B7280" android:gravity="center"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="7dp" android:text="— or —"  android:textSize="11sp" android:textColor="#9CA3AF" android:gravity="center"/>
+                <!--  Browse button  -->
+                <TextView android:id="@+id/btnBrowse" android:layout_width="114dp" android:layout_height="31dp" android:layout_marginTop="7dp" android:text="Browse Files"  android:textSize="12sp" android:textColor="#FFFFFF" android:gravity="center" android:background="#2563EB"/>
+            </LinearLayout>
+            <!--  ── RECENT FILES HEADER ──  -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="18dp" android:paddingEnd="18dp" android:paddingTop="20dp" android:paddingBottom="6dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Recent Files"  android:textSize="13sp" android:letterSpacing="-0.01" android:textColor="#0F1117"/>
+                <TextView android:id="@+id/tvSeeAll" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="See all"  android:textSize="11sp" android:textColor="#3A5CFF"/>
+            </LinearLayout>
+            <!--  Recent file 1  -->
+            <LinearLayout android:id="@+id/fileItem1" android:layout_width="match_parent" android:layout_height="70dp" android:layout_marginStart="18dp" android:layout_marginEnd="18dp" android:layout_marginBottom="8dp" android:orientation="horizontal" android:gravity="center_vertical" android:padding="11dp" android:background="#FFFFFF">
+                <FrameLayout android:layout_width="38dp" android:layout_height="46dp" android:background="#FEE2E2">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="📄" android:textSize="18sp"/>
+                </FrameLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="11dp" android:orientation="vertical">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="transformer_architecture.pdf"  android:textSize="12sp" android:textColor="#0F1117"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="3.2 MB · 2 days ago"  android:textSize="10sp" android:textColor="#6B7280"/>
+                </LinearLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓ Done"  android:textSize="10sp" android:textColor="#059669"/>
+            </LinearLayout>
+            <!--  Recent file 2  -->
+            <LinearLayout android:id="@+id/fileItem2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="18dp" android:layout_marginEnd="18dp" android:layout_marginBottom="8dp" android:orientation="horizontal" android:gravity="center_vertical" android:padding="11dp" android:background="#FFFFFF">
+                <FrameLayout android:layout_width="38dp" android:layout_height="46dp" android:background="#FEE2E2">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="📄" android:textSize="18sp"/>
+                </FrameLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="11dp" android:orientation="vertical">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="gpt4_technical_report.pdf"  android:textSize="12sp" android:textColor="#0F1117"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="8.7 MB · 5 days ago"  android:textSize="10sp" android:textColor="#6B7280"/>
+                </LinearLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓ Done"  android:textSize="10sp" android:textColor="#059669"/>
+            </LinearLayout>
+            <!--  Recent file 3  -->
+            <LinearLayout android:id="@+id/fileItem3" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="18dp" android:layout_marginEnd="18dp" android:orientation="horizontal" android:gravity="center_vertical" android:padding="11dp" android:background="#FFFFFF">
+                <FrameLayout android:layout_width="38dp" android:layout_height="46dp" android:background="#FEE2E2">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="📄" android:textSize="18sp"/>
+                </FrameLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="11dp" android:orientation="vertical">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="rlhf_openai_2022.pdf"  android:textSize="12sp" android:textColor="#0F1117"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="1.9 MB · 1 week ago"  android:textSize="10sp" android:textColor="#6B7280"/>
+                </LinearLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✓ Done"  android:textSize="10sp" android:textColor="#059669"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <!--  ── BOTTOM CTA ──  -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="85dp" android:orientation="vertical" android:background="#F8F9FF" android:paddingStart="18dp" android:paddingEnd="18dp" android:paddingTop="11dp" android:paddingBottom="24dp">
+        <TextView android:id="@+id/btnUploadAnalyze" android:layout_width="match_parent" android:layout_height="50dp" android:text="Upload &amp; Analyze"  android:textSize="14sp" android:letterSpacing="0.01" android:textColor="#FFFFFF" android:gravity="center" android:background="#2563EB"/>
+    </LinearLayout>
+</LinearLayout>

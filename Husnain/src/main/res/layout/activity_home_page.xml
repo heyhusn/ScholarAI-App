@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:id="@+id/headerBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/header_gradient_bg"
+        android:orientation="vertical"
+        android:paddingLeft="18dp"
+        android:paddingTop="12dp"
+        android:paddingRight="18dp"
+        android:paddingBottom="18dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/greeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Good morning, Ahmed 👋"
+            android:textColor="#73FFFFFF"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/libraryTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="13dp"
+            android:text="Your Library"
+            android:textColor="#FFFFFF"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/card_white_border"
+            android:backgroundTint="#1AFFFFFF"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="13dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔍"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:text="Search papers, authors…"
+                android:textColor="#66FFFFFF"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintTop_toBottomOf="@id/headerBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="18dp"
+                android:paddingTop="12dp"
+                android:paddingRight="18dp"
+                android:paddingBottom="6dp"
+                android:text="Quick Access"
+                android:textColor="#0F1117"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:paddingHorizontal="12dp">
+
+                <LinearLayout
+                    android:id="@+id/cardBeginner"
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/card_white_border"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🎓" android:textSize="20sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Beginner" android:textColor="#0F1117" android:textSize="12sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Simple explanations" android:textColor="#6B7280" android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cardTechnical"
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/card_white_border"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔬" android:textSize="20sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Technical" android:textColor="#0F1117" android:textSize="12sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="In-depth analysis" android:textColor="#6B7280" android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cardPodcast"
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/card_white_border"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🎙️" android:textSize="20sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Podcast" android:textColor="#0F1117" android:textSize="12sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AI audio mode" android:textColor="#6B7280" android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cardFlashcards"
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="6dp"
+                    android:background="@drawable/card_white_border"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🃏" android:textSize="20sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="Flashcards" android:textColor="#0F1117" android:textSize="12sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Study &amp; revise" android:textColor="#6B7280" android:textSize="10sp" />
+                </LinearLayout>
+            </GridLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="18dp"
+                android:paddingTop="16dp"
+                android:paddingRight="18dp"
+                android:paddingBottom="6dp"
+                android:text="Recent Papers"
+                android:textColor="#0F1117"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/llPaperVaswani"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginVertical="6dp"
+                android:background="@drawable/card_white_border"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="13dp">
+
+                <FrameLayout
+                    android:layout_width="38dp"
+                    android:layout_height="46dp"
+                    android:background="#EEF1FF">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="📄" android:textSize="18sp" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="11dp"
+                    android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Attention Is All You Need" android:textColor="#0F1117" android:textSize="12sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vaswani et al. · 2017" android:textColor="#6B7280" android:textSize="10sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:background="@drawable/card_white_border" android:backgroundTint="#EEF1FF" android:paddingHorizontal="8dp" android:paddingVertical="3dp" android:text="Technical" android:textColor="#3A5CFF" android:textSize="10sp" android:textStyle="bold" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="#EEF1FF">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="→" android:textColor="#3A5CFF" android:textStyle="bold" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llPaperBert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:layout_marginVertical="6dp"
+                android:background="@drawable/card_white_border"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="13dp">
+
+                <FrameLayout
+                    android:layout_width="38dp"
+                    android:layout_height="46dp"
+                    android:background="#EEF1FF">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="📄" android:textSize="18sp" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="11dp"
+                    android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="BERT: Pre-training of Deep Bidirectional Transformers" android:textColor="#0F1117" android:textSize="12sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Devlin et al. · 2019" android:textColor="#6B7280" android:textSize="10sp" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:background="@drawable/card_white_border" android:backgroundTint="#ECFDF5" android:paddingHorizontal="8dp" android:paddingVertical="3dp" android:text="Beginner" android:textColor="#059669" android:textSize="10sp" android:textStyle="bold" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="#EEF1FF">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="→" android:textColor="#3A5CFF" android:textStyle="bold" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bannerUpload"
+                android:layout_width="match_parent"
+                android:layout_height="109dp"
+                android:layout_margin="18dp"
+                android:background="@drawable/upload_banner_bg"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/bannerTag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quick Action"
+                    android:textColor="#99FFFFFF"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bannerTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upload a new paper"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bannerTag" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_white_border"
+                    android:backgroundTint="#33FFFFFF"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="7dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📤 Upload PDF" android:textColor="#FFFFFF" android:textSize="11sp" android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout android:id="@+id/btnNavHome" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:clickable="true" android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏠" android:textSize="19sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Home" android:textColor="#3A5CFF" android:textSize="9sp" android:textStyle="bold"/>
+            <View android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="#3A5CFF"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/btnNavHistory" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:alpha="0.35" android:gravity="center" android:clickable="true" android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📚" android:textSize="19sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="History" android:textColor="#374151" android:textSize="9sp" android:textStyle="bold"/>
+        </LinearLayout>
+
+        <FrameLayout android:id="@+id/btnNavUpload" android:layout_width="48dp" android:layout_height="48dp" android:layout_marginBottom="4dp" android:background="@drawable/upload_banner_bg" android:clickable="true" android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📤" android:textSize="20sp" android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <LinearLayout android:id="@+id/btnNavCards" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:alpha="0.35" android:gravity="center" android:clickable="true" android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🃏" android:textSize="19sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cards" android:textColor="#374151" android:textSize="9sp" android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/btnNavProfile" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:alpha="0.35" android:gravity="center" android:clickable="true" android:focusable="true">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="👤" android:textSize="19sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profile" android:textColor="#374151" android:textSize="9sp" android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- bg_gradient_processing replaced with inline dark color -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#0D1117"
+        android:paddingStart="26dp"
+        android:paddingEnd="26dp">
+
+
+
+        <View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+
+        <!-- BRAIN ICON: bg_ring_blue_glow replaced with inline stroke via outline -->
+        <FrameLayout
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginBottom="6dp">
+            <!-- Ring drawn as a solid circle with a darker hole effect using padding -->
+            <View
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="#2563EB"
+                android:alpha="0.25"/>
+            <View
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center"
+                android:background="#0D1117"/>
+            <TextView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:text="🧠"
+                android:textSize="34sp"
+                android:gravity="center"/>
+        </FrameLayout>
+
+        <!-- TITLE — font removed -->
+        <TextView
+            android:id="@+id/tvAnalyzing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Analyzing Paper…"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:gravity="center"/>
+
+        <!-- Filename — font removed -->
+        <TextView
+            android:id="@+id/tvFilename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="6dp"
+            android:text="transformer_architecture.pdf"
+            android:textSize="11sp"
+            android:textColor="#59FFFFFF"
+            android:gravity="center"/>
+
+        <!-- STEP LIST -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp">
+
+            <!-- Step 1: done — bg_step_done = solid green circle -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="26dp" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="9dp">
+                <FrameLayout android:layout_width="26dp" android:layout_height="26dp" android:background="#22C55E">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="✓" android:textSize="11sp" android:textColor="#FFFFFF"/>
+                </FrameLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="11dp" android:text="Extracting text" android:textSize="11.5sp" android:textColor="#D9FFFFFF"/>
+            </LinearLayout>
+
+            <!-- Step 2: done -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="26dp" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="9dp">
+                <FrameLayout android:layout_width="26dp" android:layout_height="26dp" android:background="#22C55E">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="✓" android:textSize="11sp" android:textColor="#FFFFFF"/>
+                </FrameLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="11dp" android:text="Parsing sections" android:textSize="11.5sp" android:textColor="#D9FFFFFF"/>
+            </LinearLayout>
+
+            <!-- Step 3: active — bg_step_active = solid blue circle -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="26dp" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="9dp">
+                <FrameLayout android:layout_width="26dp" android:layout_height="26dp" android:background="#2563EB">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="⟳" android:textSize="13sp" android:textColor="#FFFFFF"/>
+                </FrameLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="11dp" android:text="Generating AI summary" android:textSize="11.5sp" android:textStyle="bold" android:textColor="#FFFFFF"/>
+            </LinearLayout>
+
+            <!-- Step 4: pending — bg_step_pending = dim translucent circle -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="26dp" android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="9dp">
+                <FrameLayout android:layout_width="26dp" android:layout_height="26dp" android:background="#33FFFFFF">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="4" android:textSize="10sp" android:textColor="#33FFFFFF"/>
+                </FrameLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="11dp" android:text="Building flashcards" android:textSize="11.5sp" android:textColor="#47FFFFFF"/>
+            </LinearLayout>
+
+            <!-- Step 5: pending -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="26dp" android:orientation="horizontal" android:gravity="center_vertical">
+                <FrameLayout android:layout_width="26dp" android:layout_height="26dp" android:background="#33FFFFFF">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="5" android:textSize="10sp" android:textColor="#33FFFFFF"/>
+                </FrameLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="11dp" android:text="Extracting citations" android:textSize="11.5sp" android:textColor="#47FFFFFF"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- PROGRESS BAR: track + fill replaced with inline colors -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="16dp"
+            android:background="#33FFFFFF">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.55"
+                android:background="#2563EB"/>
+        </FrameLayout>
+
+        <!-- Progress label — font removed -->
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="55% complete"
+            android:textSize="10sp"
+            android:textColor="#47FFFFFF"/>
+
+        <!-- CTA BUTTON: bg_btn_continue replaced with inline blue -->
+        <TextView
+            android:id="@+id/btnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="18dp"
+            android:text="Continue to Summary →"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:background="#2563EB"/>
+
+        <View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+    </LinearLayout>
+</FrameLayout>
