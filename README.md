@@ -329,6 +329,3 @@ If you are using the current debug configuration, remember that the app is point
 - Some flows are animation-heavy on purpose to make the app feel responsive and polished.
 - The Android client currently expects the backend URL to be set explicitly, so keep that aligned whenever you move between local, emulator, and public deployments.
 
-## License
-
-No license file was present in the repository at the time this README was written. Add your preferred license if you want one published here.
