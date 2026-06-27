@@ -64,6 +64,9 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation(libs.navigation.fragment)
 
+    // Media-Style notification support (PodcastPlayerService)
+    implementation("androidx.media:media:1.7.0")
+
     // Testing Dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

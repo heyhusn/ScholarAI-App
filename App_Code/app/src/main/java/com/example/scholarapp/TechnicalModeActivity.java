@@ -192,7 +192,7 @@ public class TechnicalModeActivity extends AppCompatActivity {
             TextView empty = new TextView(this);
             empty.setText("No technical sections are available for this paper yet.");
             empty.setTextSize(14f);
-            empty.setTextColor(0xFF4B5563);
+            empty.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_secondary));
             technicalSectionsContainer.addView(empty);
         }
     }
@@ -201,7 +201,7 @@ public class TechnicalModeActivity extends AppCompatActivity {
         CardView card = new CardView(this);
         card.setRadius(dp(12));
         card.setCardElevation(dp(3));
-        card.setCardBackgroundColor(0xFFFFFFFF);
+        card.setCardBackgroundColor(androidx.core.content.ContextCompat.getColor(this, R.color.surface_card));
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -226,7 +226,7 @@ public class TechnicalModeActivity extends AppCompatActivity {
 
         TextView title = new TextView(this);
         title.setText(getSectionIcon(section.getKey()) + "  " + section.getTitle());
-        title.setTextColor(0xFF1A1A2E);
+        title.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
         title.setTextSize(16f);
         title.setTypeface(null, android.graphics.Typeface.BOLD);
         header.addView(title);

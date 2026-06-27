@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0D1B4B"
+    android:background="@color/bg_app"
     android:orientation="vertical"
     android:gravity="center"
     android:paddingStart="36dp"
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Generating Podcast…"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:textSize="22sp"
         android:textStyle="bold"
         android:gravity="center"/>
@@ -50,7 +50,7 @@
         android:layout_marginBottom="32dp"
         android:text="Analyzing text and preparing script"
         android:textSize="13sp"
-        android:textColor="#7B8FCC"
+        android:textColor="@color/text_secondary"
         android:gravity="center"/>
 
     <!-- Progress Bar (coherent layout structure matching ProcessingActivity) -->
@@ -72,7 +72,7 @@
         android:layout_marginTop="10dp"
         android:text="0% complete"
         android:textSize="13sp"
-        android:textColor="#7B8FCC"
+        android:textColor="@color/text_secondary"
         android:gravity="center"
         android:textStyle="bold"/>
 

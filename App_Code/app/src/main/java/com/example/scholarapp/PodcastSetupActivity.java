@@ -83,20 +83,20 @@ public class PodcastSetupActivity extends AppCompatActivity {
             cardBasic.setBackgroundResource(R.drawable.podcast_card_selected);
             cardDeep.setBackgroundResource(R.drawable.podcast_card_unselected);
 
-            tvBasicTitle.setTextColor(0xFFFFFFFF);
-            tvBasicDesc.setTextColor(0xFFE2E8FF);
+            tvBasicTitle.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
+            tvBasicDesc.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_secondary));
 
-            tvDeepTitle.setTextColor(0xFFFFFFFF);
-            tvDeepDesc.setTextColor(0xFF9EA8CC);
+            tvDeepTitle.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
+            tvDeepDesc.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_muted));
         } else {
             cardBasic.setBackgroundResource(R.drawable.podcast_card_unselected);
             cardDeep.setBackgroundResource(R.drawable.podcast_card_selected);
 
-            tvBasicTitle.setTextColor(0xFFFFFFFF);
-            tvBasicDesc.setTextColor(0xFF9EA8CC);
+            tvBasicTitle.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
+            tvBasicDesc.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_muted));
 
-            tvDeepTitle.setTextColor(0xFFFFFFFF);
-            tvDeepDesc.setTextColor(0xFFE2E8FF);
+            tvDeepTitle.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
+            tvDeepDesc.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_secondary));
         }
     }
 }

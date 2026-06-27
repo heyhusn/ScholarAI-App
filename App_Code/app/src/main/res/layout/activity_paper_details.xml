@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9FAFB">
+    android:background="@color/bg_app">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="‹"
-                    android:textColor="#3A5CFF"
+                    android:textColor="@color/accent_primary"
                     android:textSize="28sp"
                     android:textStyle="bold" />
             </FrameLayout>
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="Paper Details"
-                android:textColor="#0D1B4B"
+                android:textColor="@color/text_primary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -69,7 +69,7 @@
                     android:id="@+id/tvDetailTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#0D1B4B"
+                    android:textColor="@color/text_primary"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:lineSpacingExtra="4dp"
@@ -81,7 +81,7 @@
                     android:id="@+id/tvDetailAuthors"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:textSize="15sp"
                     android:text="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit"
                     android:layout_marginBottom="16dp" />
@@ -100,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_card_technical"
-                        android:textColor="#8A2BE2"
+                        android:textColor="@color/accent_gold"
                         android:paddingHorizontal="12dp"
                         android:paddingVertical="6dp"
                         android:textStyle="bold"
@@ -114,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_card_beginner"
-                        android:textColor="#3A5CFF"
+                        android:textColor="@color/accent_primary"
                         android:paddingHorizontal="12dp"
                         android:paddingVertical="6dp"
                         android:textStyle="bold"
@@ -128,7 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_card_podcast"
-                        android:textColor="#10B981"
+                        android:textColor="@color/accent_success"
                         android:paddingHorizontal="12dp"
                         android:paddingVertical="6dp"
                         android:textStyle="bold"
@@ -143,7 +143,7 @@
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="4dp"
-                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardBackgroundColor="@color/surface_card"
                     android:layout_marginBottom="24dp">
 
                     <LinearLayout
@@ -156,7 +156,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="PUBLISHED IN"
-                            android:textColor="#9CA3AF"
+                            android:textColor="@color/text_muted"
                             android:textSize="11sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="4dp" />
@@ -165,7 +165,7 @@
                             android:id="@+id/tvDetailVenue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:text="Communications of the ACM"
@@ -175,7 +175,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="PUBLISHER"
-                            android:textColor="#9CA3AF"
+                            android:textColor="@color/text_muted"
                             android:textSize="11sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="4dp" />
@@ -184,7 +184,7 @@
                             android:id="@+id/tvDetailPublisher"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:text="ACM"
@@ -194,7 +194,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="KEYWORDS"
-                            android:textColor="#9CA3AF"
+                            android:textColor="@color/text_muted"
                             android:textSize="11sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="4dp" />
@@ -203,7 +203,7 @@
                             android:id="@+id/tvDetailKeywords"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:text="Deep Learning, NLP"
@@ -213,7 +213,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="PRIMARY TOPIC"
-                            android:textColor="#9CA3AF"
+                            android:textColor="@color/text_muted"
                             android:textSize="11sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="4dp" />
@@ -222,7 +222,7 @@
                             android:id="@+id/tvDetailTopic"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#3A5CFF"
+                            android:textColor="@color/accent_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:text="Transformer Models"
@@ -232,7 +232,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="TAXONOMY (DOMAIN / FIELD / SUBFIELD)"
-                            android:textColor="#9CA3AF"
+                            android:textColor="@color/text_muted"
                             android:textSize="11sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="4dp" />
@@ -241,7 +241,7 @@
                             android:id="@+id/tvDetailTaxonomy"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:text="Physical Sciences / Computer Science / Vision"
@@ -251,7 +251,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="FUNDING (FUNDERS / AWARDS)"
-                            android:textColor="#9CA3AF"
+                            android:textColor="@color/text_muted"
                             android:textSize="11sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="4dp" />
@@ -260,7 +260,7 @@
                             android:id="@+id/tvDetailFunding"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:text="None"
@@ -270,7 +270,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="SDGS"
-                            android:textColor="#9CA3AF"
+                            android:textColor="@color/text_muted"
                             android:textSize="11sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="4dp" />
@@ -279,7 +279,7 @@
                             android:id="@+id/tvDetailSdgs"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:text="None"
@@ -289,7 +289,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="GEOGRAPHY (COUNTRIES / CONTINENTS)"
-                            android:textColor="#9CA3AF"
+                            android:textColor="@color/text_muted"
                             android:textSize="11sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="4dp" />
@@ -298,7 +298,7 @@
                             android:id="@+id/tvDetailGeography"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:text="US, CA"
@@ -308,7 +308,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="LANGUAGE"
-                            android:textColor="#9CA3AF"
+                            android:textColor="@color/text_muted"
                             android:textSize="11sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="4dp" />
@@ -317,7 +317,7 @@
                             android:id="@+id/tvDetailLanguage"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:text="English"
@@ -327,7 +327,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="DOI"
-                            android:textColor="#9CA3AF"
+                            android:textColor="@color/text_muted"
                             android:textSize="11sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="4dp" />
@@ -336,7 +336,7 @@
                             android:id="@+id/tvDetailDoi"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#8A2BE2"
+                            android:textColor="@color/accent_gold"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:autoLink="web"
@@ -350,7 +350,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Abstract"
-                    android:textColor="#0D1B4B"
+                    android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp" />
@@ -361,14 +361,14 @@
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="4dp"
-                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardBackgroundColor="@color/surface_card"
                     android:layout_marginBottom="16dp">
 
                     <TextView
                         android:id="@+id/tvDetailAbstract"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#1F2937"
+                        android:textColor="@color/text_secondary"
                         android:textSize="15sp"
                         android:lineSpacingExtra="5dp"
                         android:padding="20dp"
@@ -384,7 +384,7 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="0dp"
             app:cardElevation="16dp"
-            app:cardBackgroundColor="#FFFFFF">
+            app:cardBackgroundColor="@color/surface_card">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -399,10 +399,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="52dp"
                     android:text="📄 Read PDF"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:backgroundTint="#10B981"
+                    android:backgroundTint="@color/accent_success"
                     app:cornerRadius="26dp"
                     android:layout_marginEnd="8dp" />
 
@@ -413,10 +413,10 @@
                     android:layout_weight="1"
                     android:layout_height="52dp"
                     android:text="✨ AI Insights"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:backgroundTint="#3A5CFF"
+                    android:backgroundTint="@color/accent_primary"
                     app:cornerRadius="26dp" />
 
             </LinearLayout>

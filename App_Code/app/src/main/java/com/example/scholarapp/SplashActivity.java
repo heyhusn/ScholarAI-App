@@ -10,6 +10,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import android.content.Context;
 import android.content.SharedPreferences;
+import java.util.List;
+import java.util.Map;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -28,11 +30,31 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            Intent intent = new Intent(this, DashboardActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            finish();
+            FirebaseManager.getInstance().getAllPapers(
+                papers -> {
+                    if (papers != null && !papers.isEmpty()) {
+                        Map<String, Object> lastPaper = papers.get(0);
+                        String paperId = (String) lastPaper.get("id");
+                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                        intent.putExtra("paperId", paperId);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    }
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                    finish();
+                },
+                e -> {
+                    Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                    finish();
+                }
+            );
             return;
         }
 

@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/surface_base">
 
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1E3FE8" android:gravity="center"
+        android:background="@color/accent_primary" android:gravity="center"
         android:orientation="vertical"
         android:paddingTop="60dp"
         android:paddingBottom="40dp"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="ScholarMind"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign in to your account"
-            android:textColor="#80FFFFFF"
+            android:textColor="@color/text_muted"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -59,10 +59,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:text="Continue with Google"
-                android:textColor="#1E2130"
+                android:textColor="@color/text_primary"
                 app:cornerRadius="12dp"
                 app:icon="@drawable/ic_google" app:iconGravity="textStart"
-                app:strokeColor="#E5E7EB" />
+                app:strokeColor="@color/border_subtle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,28 +75,28 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"
-                    android:background="#E5E7EB" />
+                    android:background="@color/border_subtle" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:text="or sign in with email"
-                    android:textColor="#9CA3AF"
+                    android:textColor="@color/text_muted"
                     android:textSize="12sp" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"
-                    android:background="#E5E7EB" />
+                    android:background="@color/border_subtle" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="EMAIL ADDRESS"
-                android:textColor="#374151"
+                android:textColor="@color/text_muted"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -106,19 +106,19 @@
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:background="#F3F4F6"
+                android:background="@color/surface_base"
                 android:drawableStart="@drawable/ic_email" android:drawablePadding="12dp"
                 android:hint="you@university.edu"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="16dp"
-                android:textColor="#0F1117"
-                android:textColorHint="#9CA3AF" />
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PASSWORD"
-                android:textColor="#374151"
+                android:textColor="@color/text_muted"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -127,12 +127,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
-                android:background="#EEF1FF" android:drawableStart="@drawable/ic_lock" android:drawablePadding="12dp"
+                android:background="@color/surface_elevated" android:drawableStart="@drawable/ic_lock" android:drawablePadding="12dp"
                 android:hint="•••••••••"
                 android:inputType="textPassword"
                 android:paddingHorizontal="16dp"
-                android:textColor="#0F1117"
-                android:textColorHint="#9CA3AF" />
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted" />
 
             <TextView
                 android:id="@+id/tvForgotPassword"
@@ -142,7 +142,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="24dp"
                 android:text="Forgot password?"
-                android:textColor="#3A5CFF"
+                android:textColor="@color/accent_primary"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -150,9 +150,9 @@
                 android:id="@+id/btnSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:backgroundTint="#3A5CFF"
+                android:backgroundTint="@color/accent_primary"
                 android:text="Sign In"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 app:cornerRadius="14dp" />
 
             <TextView
@@ -162,7 +162,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:text="No account? Sign up free"
-                android:textColor="#6B7280"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp" />
 
         </LinearLayout>

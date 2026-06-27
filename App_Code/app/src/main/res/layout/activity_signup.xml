@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/surface_base">
 
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1E3FE8"
+        android:background="@color/accent_primary"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingTop="60dp"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="ScholarMind"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create your free account"
-            android:textColor="#80FFFFFF"
+            android:textColor="@color/text_muted"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -61,9 +61,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:text="Continue with Google"
-                android:textColor="#1E2130"
+                android:textColor="@color/text_primary"
                 app:cornerRadius="12dp"
-                app:strokeColor="#E5E7EB" />
+                app:strokeColor="@color/border_subtle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,49 +71,49 @@
                 android:layout_marginVertical="16dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
-                <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="#E5E7EB" />
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginHorizontal="8dp" android:text="or sign up with email" android:textColor="#9CA3AF" android:textSize="12sp" />
-                <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="#E5E7EB" />
+                <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="@color/border_subtle" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginHorizontal="8dp" android:text="or sign up with email" android:textColor="@color/text_muted" android:textSize="12sp" />
+                <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" android:background="@color/border_subtle" />
             </LinearLayout>
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FULL NAME" android:textColor="#374151" android:textSize="12sp" android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FULL NAME" android:textColor="@color/text_muted" android:textSize="12sp" android:textStyle="bold" />
             <EditText
                 android:id="@+id/etFullName"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:background="#F3F4F6"
+                android:background="@color/surface_base"
                 android:hint="Your full name"
-                android:textColor="#0F1117"
-                android:textColorHint="#9CA3AF"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted"
                 android:paddingHorizontal="16dp" />
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="UNIVERSITY EMAIL" android:textColor="#374151" android:textSize="12sp" android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="UNIVERSITY EMAIL" android:textColor="@color/text_muted" android:textSize="12sp" android:textStyle="bold" />
             <EditText
                 android:id="@+id/etSignUpEmail"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:background="#F3F4F6"
+                android:background="@color/surface_base"
                 android:hint="you@university.edu"
                 android:inputType="textEmailAddress"
-                android:textColor="#0F1117"
-                android:textColorHint="#9CA3AF"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted"
                 android:paddingHorizontal="16dp" />
 
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PASSWORD" android:textColor="#374151" android:textSize="12sp" android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PASSWORD" android:textColor="@color/text_muted" android:textSize="12sp" android:textStyle="bold" />
             <EditText
                 android:id="@+id/etSignUpPassword"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="8dp"
-                android:background="#F3F4F6"
+                android:background="@color/surface_base"
                 android:hint="••••••••••••"
                 android:inputType="textPassword"
-                android:textColor="#0F1117"
-                android:textColorHint="#9CA3AF"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_muted"
                 android:paddingHorizontal="16dp" />
 
             <LinearLayout
@@ -122,12 +122,12 @@
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 android:weightSum="4">
-                <View android:layout_width="0dp" android:layout_height="4dp" android:layout_marginEnd="4dp" android:layout_weight="1" android:background="#10B981" />
-                <View android:layout_width="0dp" android:layout_height="4dp" android:layout_marginEnd="4dp" android:layout_weight="1" android:background="#10B981" />
-                <View android:layout_width="0dp" android:layout_height="4dp" android:layout_marginEnd="4dp" android:layout_weight="1" android:background="#10B981" />
-                <View android:layout_width="0dp" android:layout_height="4dp" android:layout_weight="1" android:background="#F59E0B" />
+                <View android:layout_width="0dp" android:layout_height="4dp" android:layout_marginEnd="4dp" android:layout_weight="1" android:background="@color/accent_success" />
+                <View android:layout_width="0dp" android:layout_height="4dp" android:layout_marginEnd="4dp" android:layout_weight="1" android:background="@color/accent_success" />
+                <View android:layout_width="0dp" android:layout_height="4dp" android:layout_marginEnd="4dp" android:layout_weight="1" android:background="@color/accent_success" />
+                <View android:layout_width="0dp" android:layout_height="4dp" android:layout_weight="1" android:background="@color/accent_warning" />
             </LinearLayout>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Strong password" android:textColor="#10B981" android:textSize="12sp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Strong password" android:textColor="@color/accent_success" android:textSize="12sp" />
 
             <CheckBox
                 android:id="@+id/cbTerms"
@@ -136,16 +136,16 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="I agree to ScholarMind's Terms of Service and Privacy Policy"
-                android:textColor="#6B7280"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:backgroundTint="#3A5CFF"
+                android:backgroundTint="@color/accent_primary"
                 android:text="Sign Up Free"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 app:cornerRadius="14dp" />
 
             <TextView
@@ -155,7 +155,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:text="Already have an account? Sign In"
-                android:textColor="#6B7280"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp" />
 
         </LinearLayout>

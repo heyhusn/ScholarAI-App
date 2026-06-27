@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9FAFB">
+    android:background="@color/bg_app">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="‹"
-                    android:textColor="#3A5CFF"
+                    android:textColor="@color/accent_primary"
                     android:textSize="28sp"
                     android:textStyle="bold" />
             </FrameLayout>
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="Discover Papers"
-                android:textColor="#0D1B4B"
+                android:textColor="@color/text_primary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -61,7 +61,7 @@
             android:layout_marginVertical="8dp"
             app:cardCornerRadius="28dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFFFFF">
+            app:cardBackgroundColor="@color/surface_card">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -84,8 +84,8 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:hint="Search title, author, keyword..."
-                    android:textColor="#0D1B4B"
-                    android:textColorHint="#9CA3AF"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_muted"
                     android:textSize="15sp"
                     android:maxLines="1"
                     android:inputType="text"
@@ -96,7 +96,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@android:drawable/ic_menu_close_clear_cancel"
-                    android:tint="#9CA3AF"
+                    android:tint="@color/text_muted"
                     android:clickable="true"
                     android:focusable="true"
                     android:visibility="gone"
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_card_beginner"
-                    android:textColor="#3A5CFF"
+                    android:textColor="@color/accent_primary"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="8dp"
                     android:text="Machine Learning"
@@ -139,7 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_card_technical"
-                    android:textColor="#8A2BE2"
+                    android:textColor="@color/accent_gold"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="8dp"
                     android:text="Quantum Physics"
@@ -154,7 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_card_podcast"
-                    android:textColor="#10B981"
+                    android:textColor="@color/accent_success"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="8dp"
                     android:text="Bioinformatics"
@@ -169,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_card_beginner"
-                    android:textColor="#3A5CFF"
+                    android:textColor="@color/accent_primary"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="8dp"
                     android:text="Neuroscience"
@@ -184,7 +184,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_card_technical"
-                    android:textColor="#8A2BE2"
+                    android:textColor="@color/accent_gold"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="8dp"
                     android:text="Cancer Research"
@@ -202,7 +202,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trending Papers"
-            android:textColor="#6B7280"
+            android:textColor="@color/text_secondary"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginHorizontal="20dp"
@@ -229,7 +229,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:indeterminateTint="#3A5CFF"
+                android:indeterminateTint="@color/accent_primary"
                 android:visibility="gone" />
 
             <!-- Empty / Failure State -->
@@ -255,7 +255,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="No results found"
-                    android:textColor="#0D1B4B"
+                    android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="8dp" />
@@ -265,7 +265,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Try checking your spelling or search terms."
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:textSize="14sp"
                     android:gravity="center" />
             </LinearLayout>

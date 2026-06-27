@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Uploading PDF"
-        android:textColor="#0D1B4B"
+        android:textColor="@color/text_primary"
         android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"/>
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="document.pdf"
-        android:textColor="#6B7280"
+        android:textColor="@color/text_secondary"
         android:textSize="13sp"
         android:gravity="center"
         android:ellipsize="middle"
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="0%"
-        android:textColor="#3A5CFF"
+        android:textColor="@color/accent_primary"
         android:textSize="15sp"
         android:textStyle="bold"/>
 
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="Please wait, uploading your document…"
-        android:textColor="#9CA3AF"
+        android:textColor="@color/text_muted"
         android:textSize="11sp"
         android:gravity="center"/>
 
@@ -103,7 +103,7 @@
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:text="Max 5 PDFs · Max 50 MB per file"
-            android:textColor="#6B7280"
+            android:textColor="@color/text_secondary"
             android:textSize="11sp"/>
     </LinearLayout>
 

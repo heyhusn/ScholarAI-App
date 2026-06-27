@@ -121,17 +121,17 @@ public class ProcessingActivity extends AppCompatActivity {
             // DONE
             icon.setBackgroundResource(R.drawable.step_done);
             label.setText("✓");
-            label.setTextColor(0xFFFFFFFF);
+            label.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
             label.setTextSize(13);
-            name.setTextColor(0xFFFFFFFF);
+            name.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
             name.setTextSize(13.5f);
         } else if (pct >= start) {
             // ACTIVE
             icon.setBackgroundResource(R.drawable.step_active);
             label.setText("⟳");
-            label.setTextColor(0xFFFFFFFF);
+            label.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
             label.setTextSize(15);
-            name.setTextColor(0xFFFFFFFF);
+            name.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
             name.setTypeface(null, android.graphics.Typeface.BOLD);
             name.setTextSize(13.5f);
         } else {

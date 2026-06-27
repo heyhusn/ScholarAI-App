@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA">
+    android:background="@color/bg_app">
 
     <!-- Container for Fragments -->
     <FrameLayout
@@ -18,7 +18,7 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="68dp"
-        android:background="#FFFFFF"
+        android:background="@color/surface_base"
         android:elevation="8dp"
         android:orientation="horizontal"
         android:paddingBottom="8dp"
@@ -27,14 +27,14 @@
 
         <LinearLayout android:id="@+id/btnNavHome" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:clickable="true" android:focusable="true">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏠" android:textSize="19sp"/>
-            <TextView android:id="@+id/tvNavHome" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Home" android:textColor="#3A5CFF" android:textSize="9sp" android:textStyle="bold"/>
-            <View android:id="@+id/indicatorHome" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="#3A5CFF"/>
+            <TextView android:id="@+id/tvNavHome" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Home" android:textColor="@color/accent_primary" android:textSize="9sp" android:textStyle="bold"/>
+            <View android:id="@+id/indicatorHome" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="@color/accent_gold"/>
         </LinearLayout>
 
         <LinearLayout android:id="@+id/btnNavHistory" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:alpha="0.35" android:gravity="center" android:clickable="true" android:focusable="true">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📚" android:textSize="19sp"/>
-            <TextView android:id="@+id/tvNavHistory" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="History" android:textColor="#374151" android:textSize="9sp" android:textStyle="bold"/>
-            <View android:id="@+id/indicatorHistory" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="#3A5CFF" android:visibility="invisible"/>
+            <TextView android:id="@+id/tvNavHistory" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="History" android:textColor="@color/text_muted" android:textSize="9sp" android:textStyle="bold"/>
+            <View android:id="@+id/indicatorHistory" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="@color/accent_gold" android:visibility="invisible"/>
         </LinearLayout>
 
         <FrameLayout android:id="@+id/btnNavUpload" android:layout_width="48dp" android:layout_height="48dp" android:layout_marginBottom="4dp" android:background="@drawable/upload_banner_bg" android:clickable="true" android:focusable="true">
@@ -43,14 +43,14 @@
 
         <LinearLayout android:id="@+id/btnNavCards" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:alpha="0.35" android:gravity="center" android:clickable="true" android:focusable="true">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🃏" android:textSize="19sp"/>
-            <TextView android:id="@+id/tvNavCards" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cards" android:textColor="#374151" android:textSize="9sp" android:textStyle="bold"/>
-            <View android:id="@+id/indicatorCards" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="#3A5CFF" android:visibility="invisible"/>
+            <TextView android:id="@+id/tvNavCards" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cards" android:textColor="@color/text_muted" android:textSize="9sp" android:textStyle="bold"/>
+            <View android:id="@+id/indicatorCards" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="@color/accent_gold" android:visibility="invisible"/>
         </LinearLayout>
 
         <LinearLayout android:id="@+id/btnNavProfile" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:alpha="0.35" android:gravity="center" android:clickable="true" android:focusable="true">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="👤" android:textSize="19sp"/>
-            <TextView android:id="@+id/tvNavProfile" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profile" android:textColor="#374151" android:textSize="9sp" android:textStyle="bold"/>
-            <View android:id="@+id/indicatorProfile" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="#3A5CFF" android:visibility="invisible"/>
+            <TextView android:id="@+id/tvNavProfile" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profile" android:textColor="@color/text_muted" android:textSize="9sp" android:textStyle="bold"/>
+            <View android:id="@+id/indicatorProfile" android:layout_width="4dp" android:layout_height="4dp" android:layout_marginTop="2dp" android:background="@color/accent_gold" android:visibility="invisible"/>
         </LinearLayout>
     </LinearLayout>
 

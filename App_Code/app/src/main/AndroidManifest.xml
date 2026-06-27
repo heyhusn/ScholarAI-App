@@ -1,8 +1,16 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.scholarapp">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Network & storage -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
-    <application android:networkSecurityConfig="@xml/network_security_config" android:usesCleartextTraffic="${usesCleartextTraffic}" android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+
+    <!-- Foreground service & notification (podcast player) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+    <application android:networkSecurityConfig="@xml/network_security_config" android:usesCleartextTraffic="${usesCleartextTraffic}" android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/Theme.ScholarMind">
         <activity android:name=".SplashActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -33,6 +41,16 @@
         <activity android:name=".PeerReviewActivity" android:exported="false"/>
         <activity android:name=".SearchPapersActivity" android:exported="false"/>
         <activity android:name=".PaperDetailsActivity" android:exported="false"/>
+
+        <!--  Podcast Foreground Service  -->
+        <service
+            android:name=".PodcastPlayerService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="false"/>
+
+        <!--  Notification action receiver (inner class)  -->
+        <receiver
+            android:name=".PodcastPlayerService$NotificationActionReceiver"
+            android:exported="false"/>
     </application>
 </manifest>
-

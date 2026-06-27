@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.google.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/surface_base"
     android:padding="32dp">
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:text="Welcome User!"
-        android:textColor="#0F1117"
+        android:textColor="@color/text_primary"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -22,9 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-        android:backgroundTint="#EF4444"
+        android:backgroundTint="@color/accent_error"
         android:text="Sign Out"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         app:cornerRadius="14dp" />
 
 </RelativeLayout>

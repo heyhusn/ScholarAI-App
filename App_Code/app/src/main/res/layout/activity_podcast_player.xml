@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A0F24"
+    android:background="@color/bg_app"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:paddingHorizontal="24dp"
@@ -22,7 +22,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:text="SCHOLARMIND · PODCAST MODE"
-            android:textColor="#5C668D"
+            android:textColor="@color/text_muted"
             android:textSize="11sp"
             android:textStyle="bold"
             android:letterSpacing="0.1"/>
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="←"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:layout_marginBottom="2dp"/>
         </FrameLayout>
@@ -94,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Attention Is All You Need"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -107,7 +107,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="AI Audio Explanation · 18 min"
-        android:textColor="#7A8FC2"
+        android:textColor="@color/text_secondary"
         android:textSize="13sp"
         android:gravity="center"
         android:layout_marginBottom="16dp"/>
@@ -122,8 +122,12 @@
         <FrameLayout
             android:id="@+id/progressTrack"
             android:layout_width="match_parent"
-            android:layout_height="6dp"
-            android:background="@drawable/progress_track">
+            android:layout_height="18dp"
+            android:background="@drawable/progress_track"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp">
             <View
                 android:id="@+id/progressFill"
                 android:layout_width="0dp"
@@ -141,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="00:00"
-                android:textColor="#7A8FC2"
+                android:textColor="@color/text_secondary"
                 android:textSize="11sp"
                 android:textStyle="bold"/>
             <TextView
@@ -150,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:text="18:04"
-                android:textColor="#7A8FC2"
+                android:textColor="@color/text_secondary"
                 android:textSize="11sp"
                 android:textStyle="bold"/>
         </RelativeLayout>
@@ -171,7 +175,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="0.75x"
-            android:textColor="#9EA8CC"
+            android:textColor="@color/text_secondary"
             android:textSize="12sp"
             android:textStyle="bold"
             android:layout_marginEnd="4dp"
@@ -186,7 +190,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="1.0x"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="12sp"
             android:textStyle="bold"
             android:layout_marginHorizontal="2dp"
@@ -201,7 +205,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="1.25x"
-            android:textColor="#9EA8CC"
+            android:textColor="@color/text_secondary"
             android:textSize="12sp"
             android:textStyle="bold"
             android:layout_marginHorizontal="2dp"
@@ -216,7 +220,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="1.5x"
-            android:textColor="#9EA8CC"
+            android:textColor="@color/text_secondary"
             android:textSize="12sp"
             android:textStyle="bold"
             android:layout_marginHorizontal="2dp"
@@ -231,7 +235,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="2.0x"
-            android:textColor="#9EA8CC"
+            android:textColor="@color/text_secondary"
             android:textSize="12sp"
             android:textStyle="bold"
             android:layout_marginStart="4dp"
@@ -263,7 +267,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="⏮"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"/>
         </FrameLayout>
 
@@ -281,7 +285,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="⏪"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"/>
         </FrameLayout>
 
@@ -300,7 +304,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="▶"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="24sp"
                 android:layout_marginStart="3dp"/>
         </FrameLayout>
@@ -319,7 +323,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="⏩"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"/>
         </FrameLayout>
 
@@ -338,7 +342,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="⏭"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"/>
         </FrameLayout>
     </LinearLayout>
@@ -366,7 +370,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="LIVE TRANSCRIPT"
-                android:textColor="#5E6890"
+                android:textColor="@color/text_muted"
                 android:textSize="11sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.1"/>
@@ -376,7 +380,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="🎙 Alice"
-                android:textColor="#7C3AED"
+                android:textColor="@color/accent_gold"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:paddingStart="10dp"
@@ -398,7 +402,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Generating audio transcript..."
-                android:textColor="#E2E8FF"
+                android:textColor="@color/text_primary"
                 android:textSize="15sp"
                 android:lineSpacingMultiplier="1.5"/>
         </ScrollView>

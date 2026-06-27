@@ -1,11 +1,39 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!--  Base application theme.  -->
-    <style name="Base.Theme.ScholarMind" parent="Theme.Material3.DayNight.NoActionBar">
-        <!--  Customize your light theme here.  -->
-        <!--  <item name="colorPrimary">@color/my_light_primary</item>  -->
+    <style name="Base.Theme.ScholarMind" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/accent_primary</item>
+        <item name="colorOnPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/accent_gold</item>
+        <item name="colorOnSecondary">@color/text_inverse</item>
+        <item name="android:colorBackground">@color/bg_app</item>
+        <item name="colorSurface">@color/surface_base</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSurfaceVariant">@color/surface_card</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorOutline">@color/border_subtle</item>
+        <item name="android:windowBackground">@color/bg_app</item>
+        <item name="android:statusBarColor">@color/bg_app</item>
+        <item name="android:navigationBarColor">@color/bg_app</item>
+        <item name="materialButtonStyle">@style/Widget.ScholarMind.Button</item>
+        <item name="materialCardViewStyle">@style/Widget.ScholarMind.Card</item>
     </style>
+
     <style name="Theme.ScholarMind" parent="Base.Theme.ScholarMind"/>
-    <!--  Transparent background dialog for custom upload dialog  -->
+
+    <style name="Widget.ScholarMind.Button" parent="Widget.Material3.Button">
+        <item name="android:minHeight">52dp</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="backgroundTint">@color/accent_primary</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Widget.ScholarMind.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/surface_card</item>
+        <item name="strokeColor">@color/border_subtle</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
     <style name="TransparentDialogStyle" parent="Theme.AppCompat.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>

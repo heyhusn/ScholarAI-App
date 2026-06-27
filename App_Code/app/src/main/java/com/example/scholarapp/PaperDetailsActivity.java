@@ -277,7 +277,7 @@ public class PaperDetailsActivity extends AppCompatActivity {
         if (items == null || items.isEmpty()) {
             TextView emptyTv = new TextView(this);
             emptyTv.setText("None reported.");
-            emptyTv.setTextColor(0xFF6B7280); // gray
+            emptyTv.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_secondary));
             emptyTv.setTextSize(13);
             container.addView(emptyTv);
             return;
@@ -286,7 +286,7 @@ public class PaperDetailsActivity extends AppCompatActivity {
         for (String item : items) {
             TextView tv = new TextView(this);
             tv.setText("• " + item);
-            tv.setTextColor(0xFF1F2937); // dark gray
+            tv.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
             tv.setTextSize(13);
             tv.setPadding(0, 4, 0, 4);
             tv.setLineSpacing(3, 1);

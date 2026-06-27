@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9FAFB">
+    android:background="@color/bg_app">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="‹"
-                    android:textColor="#3A5CFF"
+                    android:textColor="@color/accent_primary"
                     android:textSize="28sp"
                     android:textStyle="bold" />
             </FrameLayout>
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="AI Peer Review"
-                android:textColor="#0D1B4B"
+                android:textColor="@color/text_primary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </RelativeLayout>
@@ -70,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Upload your research paper draft (PDF or DOCX). Scholar Mind AI will review the methodology, find limitations/flaws, and compile 5 questions that peer reviewers might ask."
-                    android:textColor="#6B7280"
+                    android:textColor="@color/text_secondary"
                     android:textSize="14sp"
                     android:layout_marginBottom="24dp"
                     android:lineSpacingExtra="3dp" />
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="2dp"
-                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardBackgroundColor="@color/surface_card"
                     android:layout_marginBottom="16dp"
                     android:clickable="true"
                     android:focusable="true"
@@ -106,7 +106,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Select PDF or Word File"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:layout_marginBottom="8dp" />
@@ -115,7 +115,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Supports .pdf and .docx formats (Max 50MB)"
-                            android:textColor="#9CA3AF"
+                            android:textColor="@color/text_muted"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="3dp"
-                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardBackgroundColor="@color/surface_card"
                     android:layout_marginBottom="16dp"
                     android:visibility="gone">
 
@@ -156,7 +156,7 @@
                                 android:id="@+id/tvSelectedFilename"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textColor="#0D1B4B"
+                                android:textColor="@color/text_primary"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 android:maxLines="1"
@@ -167,7 +167,7 @@
                                 android:id="@+id/tvSelectedFilesize"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textColor="#6B7280"
+                                android:textColor="@color/text_secondary"
                                 android:textSize="12sp"
                                 android:layout_marginTop="2dp"
                                 android:text="2.4 MB" />
@@ -178,7 +178,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="✕"
-                            android:textColor="#EF4444"
+                            android:textColor="@color/accent_error"
                             android:textSize="20sp"
                             android:padding="8dp"
                             android:clickable="true"
@@ -193,10 +193,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:text="Start Peer Review Analysis"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:backgroundTint="#3A5CFF"
+                    android:backgroundTint="@color/accent_primary"
                     app:cornerRadius="27dp"
                     android:layout_marginBottom="24dp"
                     android:enabled="false" />
@@ -214,14 +214,14 @@
                     <ProgressBar
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:indeterminateTint="#3A5CFF"
+                        android:indeterminateTint="@color/accent_primary"
                         android:layout_marginBottom="16dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="✨ Reviewing paper methodology..."
-                        android:textColor="#0D1B4B"
+                        android:textColor="@color/text_primary"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="6dp" />
@@ -230,7 +230,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="DeepSeek is identifying limitations and technical flaws. Please wait..."
-                        android:textColor="#6B7280"
+                        android:textColor="@color/text_secondary"
                         android:textSize="12sp"
                         android:gravity="center" />
                 </LinearLayout>
@@ -249,7 +249,7 @@
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="3dp"
-                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardBackgroundColor="@color/surface_card"
                         android:layout_marginBottom="16dp">
 
                         <LinearLayout
@@ -262,7 +262,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="⚠️ Limitations &amp; Scope Constraints"
-                                android:textColor="#EF4444"
+                                android:textColor="@color/accent_error"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:layout_marginBottom="12dp" />
@@ -281,7 +281,7 @@
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="3dp"
-                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardBackgroundColor="@color/surface_card"
                         android:layout_marginBottom="16dp">
 
                         <LinearLayout
@@ -294,7 +294,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="🔧 Methodological &amp; Technical Flaws"
-                                android:textColor="#D97706"
+                                android:textColor="@color/accent_warning"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:layout_marginBottom="12dp" />
@@ -313,7 +313,7 @@
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="16dp"
                         app:cardElevation="3dp"
-                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardBackgroundColor="@color/surface_card"
                         android:layout_marginBottom="24dp">
 
                         <LinearLayout
@@ -326,7 +326,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="❓ Reviewer Questions (5)"
-                                android:textColor="#3A5CFF"
+                                android:textColor="@color/accent_primary"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:layout_marginBottom="12dp" />
@@ -345,11 +345,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="52dp"
                         android:text="📋 Copy Review Report"
-                        android:textColor="#3A5CFF"
+                        android:textColor="@color/accent_primary"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:backgroundTint="#FFFFFF"
-                        app:strokeColor="#3A5CFF"
+                        android:backgroundTint="@color/surface_card"
+                        app:strokeColor="@color/accent_primary"
                         app:strokeWidth="1.5dp"
                         app:cornerRadius="26dp"
                         android:layout_marginBottom="32dp" />

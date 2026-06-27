@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#0D1B4B"
+    android:background="@color/bg_app"
     android:padding="20dp">
 
     <!-- Header bar -->
@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="←"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 android:layout_marginBottom="2dp"/>
         </FrameLayout>
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="Podcast Setup"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="20sp"
             android:textStyle="bold"/>
     </LinearLayout>
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Configure your AI Podcast"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="6dp"/>
@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select how technical you want the generated audio explanation to be."
-                android:textColor="#9EA8CC"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp"
                 android:layout_marginBottom="28dp"/>
 
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Technicality Level"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>
@@ -113,7 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Basic"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp"/>
@@ -123,7 +123,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Simple &amp; high-level summaries"
-                        android:textColor="#E2E8FF"
+                        android:textColor="@color/text_primary"
                         android:textSize="11sp"
                         android:gravity="center"/>
                 </LinearLayout>
@@ -154,7 +154,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Deep Tech"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp"/>
@@ -164,7 +164,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Detailed equations &amp; methods"
-                        android:textColor="#9EA8CC"
+                        android:textColor="@color/text_secondary"
                         android:textSize="11sp"
                         android:gravity="center"/>
                 </LinearLayout>
@@ -176,7 +176,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Additional Instructions"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>
@@ -189,8 +189,8 @@
                 android:minLines="3"
                 android:gravity="top|start"
                 android:hint="If you want to add additional instruction (optional)"
-                android:textColorHint="#5E6890"
-                android:textColor="#FFFFFF"
+                android:textColorHint="@color/text_muted"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:padding="16dp"
                 android:background="@drawable/podcast_edittext_bg"
@@ -209,7 +209,7 @@
                 android:layout_height="56dp"
                 android:text="Generate Podcast"
                 android:textAllCaps="false"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:background="@drawable/podcast_btn_bg"

@@ -2,11 +2,11 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
 
-    <solid android:color="#1AFFFFFF" />
+    <solid android:color="@color/overlay_faint" />
 
     <stroke
         android:width="2dp"
-        android:color="#40FFFFFF" />
+        android:color="@color/overlay_soft" />
 
     <size
         android:width="68dp"

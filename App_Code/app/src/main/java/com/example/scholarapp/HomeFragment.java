@@ -11,13 +11,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.scholarapp.models.PaperAnalysisResponse;
 import com.example.scholarapp.models.PaperSection;
+import com.example.scholarapp.models.OpenAlexPaper;
+import com.example.scholarapp.models.OpenAlexSearchResponse;
 import com.example.scholarapp.network.ApiService;
 import com.example.scholarapp.network.RetrofitClient;
-import com.example.scholarapp.utils.CitationGraphView;
 import com.example.scholarapp.utils.CitationMeterView;
 import com.example.scholarapp.utils.PaperLocalStore;
 import com.example.scholarapp.utils.TouchFeedbackUtils;
@@ -56,9 +58,6 @@ public class HomeFragment extends Fragment {
         TextView tvCitCount = view.findViewById(R.id.tvCitationNumber);
         TextView tvCitRating = view.findViewById(R.id.tvCitationRating);
         CitationMeterView citationMeter = view.findViewById(R.id.citationMeter);
-        CitationGraphView citationGraphView = view.findViewById(R.id.citationGraphView);
-        LinearLayout cardSelectedCitation = view.findViewById(R.id.cardSelectedCitation);
-        TextView tvSelectedCitation = view.findViewById(R.id.tvSelectedCitation);
 
         LinearLayout btnBeginner = view.findViewById(R.id.btnBeginner);
         LinearLayout btnTechnical = view.findViewById(R.id.btnTechnical);
@@ -76,14 +75,14 @@ public class HomeFragment extends Fragment {
                 currentAnalysis[0] = cachedAnalysis;
                 bindAnalysis(cachedAnalysis, tvTitle, tvAuthors, tvFieldTag, tvCitTag, tvOverviewTitle,
                         tvOverviewBody, sectionsContainer, tvCitAuthors, tvCitCount, tvCitRating,
-                        citationMeter, citationGraphView, cardSelectedCitation, tvSelectedCitation);
+                        citationMeter);
             } else {
                 showPlaceholder(tvTitle, tvAuthors, tvOverviewTitle, tvOverviewBody, sectionsContainer);
                 loadPaperHeaderFallback(selectedPaperId, tvTitle, tvAuthors);
             }
             fetchLatestAnalysis(selectedPaperId, currentAnalysis, tvTitle, tvAuthors, tvFieldTag, tvCitTag,
                     tvOverviewTitle, tvOverviewBody, sectionsContainer, tvCitAuthors, tvCitCount, tvCitRating,
-                    citationMeter, citationGraphView, cardSelectedCitation, tvSelectedCitation);
+                    citationMeter);
         }
 
         tabSummary.setOnClickListener(v -> showTab(tabSummary, tabCitations, contentSummary, contentCitations));
@@ -91,8 +90,7 @@ public class HomeFragment extends Fragment {
             showTab(tabCitations, tabSummary, contentCitations, contentSummary);
             PaperAnalysisResponse analysis = currentAnalysis[0];
             if (analysis != null) {
-                citationMeter.setScore(0, false);
-                citationMeter.postDelayed(() -> citationMeter.setScore(analysis.getCitationScore(), true), 50);
+                fetchOpenAlexCitationData(analysis.getTitle(), tvCitCount, tvCitRating, citationMeter);
             }
         });
 
@@ -113,20 +111,6 @@ public class HomeFragment extends Fragment {
             }
         });
         TouchFeedbackUtils.applyScaleFeedback(tvTitle);
-
-        cardSelectedCitation.setOnClickListener(v -> {
-            String citationText = tvSelectedCitation.getText().toString();
-            if (!citationText.isEmpty()) {
-                try {
-                    Intent intent = new Intent(Intent.ACTION_VIEW,
-                            android.net.Uri.parse("https://scholar.google.com/scholar?q=" + android.net.Uri.encode(citationText)));
-                    startActivity(intent);
-                } catch (Exception e) {
-                    Toast.makeText(requireContext(), "No browser app found to open link.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        TouchFeedbackUtils.applyScaleFeedback(cardSelectedCitation);
 
         btnBeginner.setOnClickListener(v -> launchMode(BeginnerModeActivity.class, selectedPaperId, currentAnalysis[0]));
         btnTechnical.setOnClickListener(v -> launchMode(TechnicalModeActivity.class, selectedPaperId, currentAnalysis[0]));
@@ -169,10 +153,7 @@ public class HomeFragment extends Fragment {
             TextView tvCitAuthors,
             TextView tvCitCount,
             TextView tvCitRating,
-            CitationMeterView citationMeter,
-            CitationGraphView citationGraphView,
-            LinearLayout cardSelectedCitation,
-            TextView tvSelectedCitation
+            CitationMeterView citationMeter
     ) {
         String userId = FirebaseAuth.getInstance().getCurrentUser() != null
                 ? FirebaseAuth.getInstance().getCurrentUser().getUid()
@@ -192,7 +173,7 @@ public class HomeFragment extends Fragment {
                 PaperLocalStore.cacheAnalysis(requireContext(), response.body());
                 bindAnalysis(response.body(), tvTitle, tvAuthors, tvFieldTag, tvCitTag, tvOverviewTitle,
                         tvOverviewBody, sectionsContainer, tvCitAuthors, tvCitCount, tvCitRating,
-                        citationMeter, citationGraphView, cardSelectedCitation, tvSelectedCitation);
+                        citationMeter);
             }
 
             @Override
@@ -237,10 +218,7 @@ public class HomeFragment extends Fragment {
             TextView tvCitAuthors,
             TextView tvCitCount,
             TextView tvCitRating,
-            CitationMeterView citationMeter,
-            CitationGraphView citationGraphView,
-            LinearLayout cardSelectedCitation,
-            TextView tvSelectedCitation
+            CitationMeterView citationMeter
     ) {
         String paperTitle = analysis.getTitle() != null ? analysis.getTitle() : "Unknown Title";
         tvTitle.setText(paperTitle);
@@ -253,27 +231,63 @@ public class HomeFragment extends Fragment {
         bindDynamicSections(sectionsContainer, analysis.getSections());
 
         tvCitAuthors.setText("Authors: " + (analysis.getAuthors() != null ? analysis.getAuthors() : "Unknown"));
-        tvCitCount.setText(analysis.getCitationCount() + " refs");
-        tvCitRating.setText("Impact: " + (analysis.getCitationImpact() != null ? analysis.getCitationImpact() : "Unknown"));
 
-        citationGraphView.setCitations(paperTitle, analysis.getCitationsList());
-        citationGraphView.setOnNodeSelectedListener((citationText, index) -> {
-            if (citationText == null) {
-                cardSelectedCitation.animate().alpha(0f).setDuration(150)
-                        .withEndAction(() -> cardSelectedCitation.setVisibility(View.GONE))
-                        .start();
-                return;
+        fetchOpenAlexCitationData(paperTitle, tvCitCount, tvCitRating, citationMeter);
+    }
+
+    private void fetchOpenAlexCitationData(String title, TextView tvCitCount, TextView tvCitRating, CitationMeterView citationMeter) {
+        if (title == null || title.trim().isEmpty()) return;
+
+        ApiService apiService = RetrofitClient.getApiService();
+        apiService.searchPapers(title, 1, null).enqueue(new Callback<OpenAlexSearchResponse>() {
+            @Override
+            public void onResponse(Call<OpenAlexSearchResponse> call, Response<OpenAlexSearchResponse> response) {
+                if (!isAdded()) return;
+
+                if (response.isSuccessful() && response.body() != null && response.body().getResults() != null && !response.body().getResults().isEmpty()) {
+                    OpenAlexPaper matchedPaper = response.body().getResults().get(0);
+                    int citationCount = matchedPaper.getCitationCount();
+
+                    tvCitCount.setText(citationCount + " citations (OpenAlex)");
+
+                    String impactLevel;
+                    int meterScore;
+                    if (citationCount < 10) {
+                        impactLevel = "Low Impact";
+                        meterScore = 15 + (citationCount * 15 / 10);
+                    } else if (citationCount < 100) {
+                        impactLevel = "Medium Impact";
+                        meterScore = 35 + ((citationCount - 10) * 35 / 90);
+                    } else {
+                        impactLevel = "Highly Impact";
+                        meterScore = 75 + Math.min(25, (citationCount - 100) * 25 / 1000);
+                    }
+
+                    tvCitRating.setText("Impact: " + impactLevel);
+                    tvCitRating.setTextColor(ContextCompat.getColor(requireContext(),
+                            impactLevel.equals("Highly Impact") ? R.color.accent_success :
+                            (impactLevel.equals("Medium Impact") ? R.color.accent_gold : R.color.text_muted)
+                    ));
+
+                    citationMeter.setScore(0, false);
+                    citationMeter.postDelayed(() -> citationMeter.setScore(meterScore, true), 50);
+                } else {
+                    tvCitCount.setText("— citations");
+                    tvCitRating.setText("Impact: Low Impact");
+                    tvCitRating.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_muted));
+                    citationMeter.setScore(0, false);
+                }
             }
-            tvSelectedCitation.setText(citationText);
-            if (cardSelectedCitation.getVisibility() != View.VISIBLE) {
-                cardSelectedCitation.setAlpha(0f);
-                cardSelectedCitation.setVisibility(View.VISIBLE);
-                cardSelectedCitation.animate().alpha(1f).setDuration(200).start();
+
+            @Override
+            public void onFailure(Call<OpenAlexSearchResponse> call, Throwable t) {
+                if (!isAdded()) return;
+                tvCitCount.setText("— citations");
+                tvCitRating.setText("Impact: Low Impact");
+                tvCitRating.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_muted));
+                citationMeter.setScore(0, false);
             }
         });
-
-        citationMeter.setScore(0, false);
-        citationMeter.postDelayed(() -> citationMeter.setScore(analysis.getCitationScore(), true), 50);
     }
 
     private void bindDynamicSections(LinearLayout container, List<PaperSection> sections) {
@@ -282,7 +296,7 @@ public class HomeFragment extends Fragment {
             TextView empty = new TextView(requireContext());
             empty.setText("No structured sections were found for this paper yet.");
             empty.setTextSize(13f);
-            empty.setTextColor(0xFF6B7280);
+            empty.setTextColor(color(R.color.text_secondary));
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
@@ -330,21 +344,21 @@ public class HomeFragment extends Fragment {
         titleParams.setMargins(dp(10), 0, 0, 0);
         title.setLayoutParams(titleParams);
         title.setText(section.getTitle());
-        title.setTextColor(0xFF111827);
+        title.setTextColor(color(R.color.text_primary));
         title.setTextSize(14f);
         title.setTypeface(null, android.graphics.Typeface.BOLD);
         header.addView(title);
 
         TextView arrow = new TextView(requireContext());
         arrow.setText(startOpen ? "∨" : "›");
-        arrow.setTextColor(0xFF6B7280);
+        arrow.setTextColor(color(R.color.accent_gold));
         arrow.setTextSize(18f);
         header.addView(arrow);
 
         TextView body = new TextView(requireContext());
         body.setPadding(dp(16), dp(16), dp(16), dp(16));
         body.setText(section.getContent());
-        body.setTextColor(0xFF6B7280);
+        body.setTextColor(color(R.color.text_secondary));
         body.setTextSize(13f);
         body.setLineSpacing(0f, 1.4f);
         body.setVisibility(startOpen ? View.VISIBLE : View.GONE);
@@ -403,9 +417,9 @@ public class HomeFragment extends Fragment {
     private void showTab(TextView activeTab, TextView otherTab,
                          LinearLayout activeContent, LinearLayout otherContent) {
         activeTab.setBackgroundResource(R.drawable.tab_selected_bg);
-        activeTab.setTextColor(0xFFFFFFFF);
+        activeTab.setTextColor(color(R.color.text_primary));
         otherTab.setBackgroundResource(0);
-        otherTab.setTextColor(0xFF6B7280);
+        otherTab.setTextColor(color(R.color.text_secondary));
 
         activeContent.setVisibility(View.VISIBLE);
         activeContent.setAlpha(0f);
@@ -433,5 +447,9 @@ public class HomeFragment extends Fragment {
 
     private int dp(int value) {
         return Math.round(value * requireContext().getResources().getDisplayMetrics().density);
+    }
+
+    private int color(int resId) {
+        return ContextCompat.getColor(requireContext(), resId);
     }
 }

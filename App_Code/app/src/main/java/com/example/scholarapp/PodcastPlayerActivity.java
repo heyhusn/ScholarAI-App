@@ -1,9 +1,11 @@
 package com.example.scholarapp;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
-import android.speech.tts.UtteranceProgressListener;
-import android.speech.tts.Voice;
+import android.os.IBinder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -12,22 +14,33 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
-public class PodcastPlayerActivity extends AppCompatActivity {
+/**
+ * UI controller for the podcast player screen. All TTS and dialogue state now
+ * lives in {@link PodcastPlayerService}. This activity binds to the service,
+ * registers a {@link PodcastPlayerService.PlaybackCallback} for real-time
+ * updates, and delegates every button press to the service's public API.
+ *
+ * <p>When the user leaves (onStop), the activity unbinds but does NOT stop the
+ * service — playback continues in the background with the Media-Style
+ * notification. When the user returns, onStart re-binds and the activity
+ * restores its UI from the service's current state.
+ */
+public class PodcastPlayerActivity extends AppCompatActivity
+        implements PodcastPlayerService.PlaybackCallback {
 
     // ── Views ──────────────────────────────────────────────────────────────
     private FrameLayout btnBack;
+    private View progressTrack;
     private View progressFill;
     private TextView tvCurrentTime;
     private TextView tvTotalTime;
     private TextView tvPaperTitle;
     private TextView tvPaperAuthor;
     private TextView tvTranscriptText;
-    private TextView tvSpeakerLabel;   // NEW: shows "Alice 🎙" or "Bob 🎙"
+    private TextView tvSpeakerLabel;
     private TextView tvPlayIcon;
     private FrameLayout btnPlayPause;
     private FrameLayout btnRewind;
@@ -43,30 +56,45 @@ public class PodcastPlayerActivity extends AppCompatActivity {
     private TextView btnSpeed150;
     private TextView btnSpeed200;
 
-    // ── Dialogue data ──────────────────────────────────────────────────────
-    /**
-     * One parsed line of the podcast script.
-     */
-    private static class DialogueLine {
-        String speaker; // "Alice" or "Bob"
-        String text;
-    }
+    // ── Service binding ────────────────────────────────────────────────────
+    private PodcastPlayerService playerService;
+    private boolean serviceBound = false;
 
-    private List<DialogueLine> dialogueLines = new ArrayList<>();
-    private int currentLineIndex = 0;
-
-    // ── TTS state ──────────────────────────────────────────────────────────
-    private TextToSpeech tts;
-    private boolean isTtsReady = false;
-    private boolean isPlaying  = false;
-    private float   playbackSpeed = 1.0f;
-
-    private Voice aliceVoice = null;   // higher pitch / female preference
-    private Voice bobVoice   = null;   // lower  pitch / male preference
+    // ── Intent data (kept for starting/restarting the service) ─────────────
+    private String paperTitle;
+    private String paperAuthor;
+    private String rawScript;
 
     // ── Ring-pulse animator ────────────────────────────────────────────────
     private android.animation.ValueAnimator ringPulseAnimator;
 
+    // ──────────────────────────────────────────────────────────────────────
+    private final ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            PodcastPlayerService.LocalBinder binder =
+                    (PodcastPlayerService.LocalBinder) service;
+            playerService = binder.getService();
+            serviceBound  = true;
+
+            // Push the script if the service hasn't received it yet (first launch)
+            if (rawScript != null && playerService.getTotalLines() == 0) {
+                playerService.setScript(rawScript, paperTitle, paperAuthor);
+            }
+
+            // Register for live callbacks — will immediately sync UI state
+            playerService.setUpdateCallback(PodcastPlayerActivity.this);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            serviceBound  = false;
+            playerService = null;
+        }
+    };
+
+    // ──────────────────────────────────────────────────────────────────────
+    //  Lifecycle
     // ──────────────────────────────────────────────────────────────────────
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +102,103 @@ public class PodcastPlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_podcast_player);
 
         bindViews();
-        setupIntentData();
+        readIntentData();
         setupClickListeners();
-        initTextToSpeech();
     }
 
-    // ── Binding ────────────────────────────────────────────────────────────
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Start the service (idempotent) then bind to it
+        Intent serviceIntent = new Intent(this, PodcastPlayerService.class);
+        serviceIntent.putExtra(PodcastPlayerService.EXTRA_SCRIPT,       rawScript);
+        serviceIntent.putExtra(PodcastPlayerService.EXTRA_PAPER_TITLE,  paperTitle);
+        serviceIntent.putExtra(PodcastPlayerService.EXTRA_PAPER_AUTHOR, paperAuthor);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(serviceIntent);
+        } else {
+            startService(serviceIntent);
+        }
+
+        bindService(serviceIntent, serviceConnection, BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // Unregister callback so we don't leak the activity, but keep the
+        // service running for background playback.
+        if (serviceBound && playerService != null) {
+            playerService.setUpdateCallback(null);
+        }
+        unbindService(serviceConnection);
+        serviceBound  = false;
+        playerService = null;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopRingPulse();
+
+        // Only fully stop the service when the activity is truly finishing
+        // (back pressed / finish() called), NOT on rotation/config changes.
+        if (isFinishing()) {
+            Intent stopIntent = new Intent(this, PodcastPlayerService.class);
+            stopIntent.setAction(PodcastPlayerService.ACTION_STOP);
+            startService(stopIntent);
+        }
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
+    //  PlaybackCallback — called from PodcastPlayerService on its thread
+    // ──────────────────────────────────────────────────────────────────────
+    @Override
+    public void onTtsReady() {
+        // TTS is ready — nothing extra needed; UI is driven by other callbacks
+    }
+
+    @Override
+    public void onLineChanged(int lineIndex, PodcastPlayerService.DialogueLine line) {
+        runOnUiThread(() -> {
+            updateTranscriptDisplay(line);
+            updatePlaybackProgress(lineIndex);
+        });
+    }
+
+    @Override
+    public void onPlayStateChanged(boolean playing) {
+        runOnUiThread(() -> {
+            if (playing) {
+                tvPlayIcon.setText("||");
+                tvPlayIcon.setPadding(0, 0, 0, 0);
+                startRingPulse();
+            } else {
+                tvPlayIcon.setText("▶");
+                tvPlayIcon.setPadding(6, 0, 0, 0);
+                stopRingPulse();
+            }
+        });
+    }
+
+    @Override
+    public void onFinished() {
+        runOnUiThread(() -> {
+            tvPlayIcon.setText("▶");
+            tvPlayIcon.setPadding(6, 0, 0, 0);
+            stopRingPulse();
+            updatePlaybackProgress(0);
+        });
+    }
+
+    // ──────────────────────────────────────────────────────────────────────
+    //  View binding
+    // ──────────────────────────────────────────────────────────────────────
     private void bindViews() {
         btnBack          = findViewById(R.id.btnBack);
+        progressTrack    = findViewById(R.id.progressTrack);
         progressFill     = findViewById(R.id.progressFill);
         tvCurrentTime    = findViewById(R.id.tvCurrentTime);
         tvTotalTime      = findViewById(R.id.tvTotalTime);
@@ -105,239 +222,56 @@ public class PodcastPlayerActivity extends AppCompatActivity {
         btnSpeed200 = findViewById(R.id.btnSpeed200);
     }
 
-    // ── Data setup ─────────────────────────────────────────────────────────
-    private void setupIntentData() {
-        String title  = getIntent().getStringExtra("paperTitle");
-        String author = getIntent().getStringExtra("paperAuthor");
-        if (title  != null) tvPaperTitle.setText(title);
-        if (author != null) tvPaperAuthor.setText(author);
+    // ──────────────────────────────────────────────────────────────────────
+    //  Read intent extras
+    // ──────────────────────────────────────────────────────────────────────
+    private void readIntentData() {
+        paperTitle  = getIntent().getStringExtra("paperTitle");
+        paperAuthor = getIntent().getStringExtra("paperAuthor");
+        rawScript   = getIntent().getStringExtra("script");
 
-        String rawScript = getIntent().getStringExtra("script");
         if (rawScript == null || rawScript.trim().isEmpty()) {
             rawScript = "Alice: Welcome to Scholar Mind!\nBob: Let us explore this fascinating paper together.";
         }
 
-        parseDialogue(rawScript);
-
-        // Display first line immediately
-        if (!dialogueLines.isEmpty()) {
-            DialogueLine first = dialogueLines.get(0);
-            updateTranscriptDisplay(first);
-        }
-        updatePlaybackProgress();
+        if (paperTitle  != null) tvPaperTitle.setText(paperTitle);
+        if (paperAuthor != null) tvPaperAuthor.setText(paperAuthor);
     }
 
-    /**
-     * Parses a raw script string into {@link DialogueLine} objects.
-     *
-     * Accepts lines starting with "Alice:" or "Bob:" (case-insensitive).
-     * Lines that don't match either prefix are silently skipped (e.g. blank
-     * lines, stage directions the model accidentally included, etc.).
-     */
-    private void parseDialogue(String rawScript) {
-        dialogueLines.clear();
-
-        // Strip markdown bold markers and reference brackets
-        String clean = rawScript
-                .replaceAll("\\*\\*", "")
-                .replaceAll("\\[.*?\\]", "")
-                .trim();
-
-        String[] lines = clean.split("\\r?\\n");
-        for (String line : lines) {
-            String trimmed = line.trim();
-            if (trimmed.isEmpty()) continue;
-
-            String lowerLine = trimmed.toLowerCase(Locale.US);
-            DialogueLine dl = new DialogueLine();
-
-            if (lowerLine.startsWith("alice:")) {
-                dl.speaker = "Alice";
-                dl.text    = trimmed.substring(6).trim();
-            } else if (lowerLine.startsWith("bob:")) {
-                dl.speaker = "Bob";
-                dl.text    = trimmed.substring(4).trim();
-            } else {
-                // Fallback: if the script wasn't perfectly formatted, wrap
-                // the whole line under whichever speaker we last used, or Alice.
-                dl.speaker = dialogueLines.isEmpty() ? "Alice"
-                        : dialogueLines.get(dialogueLines.size() - 1).speaker.equals("Alice") ? "Bob" : "Alice";
-                dl.text = trimmed;
-            }
-
-            if (!dl.text.isEmpty()) {
-                dialogueLines.add(dl);
-            }
-        }
-
-        // Safety: if nothing parsed, add a placeholder
-        if (dialogueLines.isEmpty()) {
-            DialogueLine dl = new DialogueLine();
-            dl.speaker = "Alice";
-            dl.text    = rawScript.trim();
-            dialogueLines.add(dl);
-        }
-    }
-
-    // ── TTS initialisation ─────────────────────────────────────────────────
-    private void initTextToSpeech() {
-        tts = new TextToSpeech(this, status -> {
-            if (status == TextToSpeech.SUCCESS) {
-                int result = tts.setLanguage(Locale.US);
-                if (result == TextToSpeech.LANG_MISSING_DATA
-                        || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                    runOnUiThread(() -> Toast.makeText(this,
-                            "English TTS not supported on this device.", Toast.LENGTH_LONG).show());
-                } else {
-                    tts.setSpeechRate(playbackSpeed);
-                    pickVoices();          // select distinct Alice / Bob voices
-                    setupUtteranceListener();
-                    isTtsReady = true;
-                }
-            } else {
-                runOnUiThread(() -> Toast.makeText(this,
-                        "Text-to-Speech initialisation failed.", Toast.LENGTH_SHORT).show());
-            }
-        });
-    }
-
-    /**
-     * Tries to pick two distinct English voices: one higher-pitched (Alice)
-     * and one lower-pitched (Bob). Falls back gracefully if the device only
-     * provides a single voice.
-     */
-    private void pickVoices() {
-        try {
-            Set<Voice> voices = tts.getVoices();
-            if (voices == null || voices.isEmpty()) return;
-
-            // Collect English voices, preferring network-quality ones
-            List<Voice> englishVoices = new ArrayList<>();
-            for (Voice v : voices) {
-                if (v.getLocale() != null
-                        && v.getLocale().getLanguage().equals("en")
-                        && !v.isNetworkConnectionRequired()) {
-                    englishVoices.add(v);
-                }
-            }
-            if (englishVoices.isEmpty()) {
-                // Fall back to all voices including network ones
-                for (Voice v : voices) {
-                    if (v.getLocale() != null && v.getLocale().getLanguage().equals("en")) {
-                        englishVoices.add(v);
-                    }
-                }
-            }
-            if (englishVoices.isEmpty()) return;
-
-            // Try to find a "female" labelled voice for Alice
-            for (Voice v : englishVoices) {
-                String name = v.getName().toLowerCase(Locale.US);
-                if (name.contains("female") || name.contains("f-") || name.contains("-f_")
-                        || name.contains("woman") || name.contains("girl")) {
-                    aliceVoice = v;
-                    break;
-                }
-            }
-            // Try to find a "male" labelled voice for Bob
-            for (Voice v : englishVoices) {
-                String name = v.getName().toLowerCase(Locale.US);
-                if ((name.contains("male") && !name.contains("female"))
-                        || name.contains("m-") || name.contains("-m_")
-                        || name.contains("man") || name.contains("boy")) {
-                    if (aliceVoice == null || !v.getName().equals(aliceVoice.getName())) {
-                        bobVoice = v;
-                        break;
-                    }
-                }
-            }
-
-            // If we couldn't find distinct labelled voices, just use the first
-            // two different voices available.
-            if (aliceVoice == null && englishVoices.size() >= 1) {
-                aliceVoice = englishVoices.get(0);
-            }
-            if (bobVoice == null && englishVoices.size() >= 2) {
-                bobVoice = englishVoices.get(1);
-            }
-            // If only one voice is available, both speakers will use it but
-            // with different pitch to still sound a little different.
-        } catch (Exception e) {
-            // Voice enumeration failed — we'll just use default voice with pitch changes
-        }
-    }
-
-    // ── Utterance listener ─────────────────────────────────────────────────
-    private void setupUtteranceListener() {
-        tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
-            @Override
-            public void onStart(String utteranceId) {
-                runOnUiThread(() -> updatePlaybackProgress());
-            }
-
-            @Override
-            public void onDone(String utteranceId) {
-                runOnUiThread(() -> {
-                    if (isPlaying) {
-                        currentLineIndex++;
-                        if (currentLineIndex < dialogueLines.size()) {
-                            speakCurrentLine();
-                        } else {
-                            // Finished
-                            isPlaying = false;
-                            tvPlayIcon.setText("▶");
-                            tvPlayIcon.setPadding(6, 0, 0, 0);
-                            currentLineIndex = 0;
-                            updatePlaybackProgress();
-                            stopRingPulse();
-                        }
-                    }
-                });
-            }
-
-            @Override
-            public void onError(String utteranceId) {
-                runOnUiThread(() -> Toast.makeText(PodcastPlayerActivity.this,
-                        "Audio playback error.", Toast.LENGTH_SHORT).show());
-            }
-        });
-    }
-
-    // ── Click listeners ────────────────────────────────────────────────────
+    // ──────────────────────────────────────────────────────────────────────
+    //  Click listeners — all delegate to the service
+    // ──────────────────────────────────────────────────────────────────────
     private void setupClickListeners() {
         btnBack.setOnClickListener(v -> finish());
 
         btnPlayPause.setOnClickListener(v -> {
-            if (!isTtsReady) {
-                Toast.makeText(this, "TTS is still initialising, please wait.", Toast.LENGTH_SHORT).show();
+            if (playerService == null) {
+                Toast.makeText(this, "Player is still starting up, please wait.",
+                        Toast.LENGTH_SHORT).show();
                 return;
             }
-            isPlaying = !isPlaying;
-            if (isPlaying) {
-                tvPlayIcon.setText("||");
-                tvPlayIcon.setPadding(0, 0, 0, 0);
-                speakCurrentLine();
-                startRingPulse();
-            } else {
-                tvPlayIcon.setText("▶");
-                tvPlayIcon.setPadding(6, 0, 0, 0);
-                if (tts != null) tts.stop();
-                stopRingPulse();
+            if (!playerService.isTtsReady()) {
+                Toast.makeText(this, "TTS is still initialising, please wait.",
+                        Toast.LENGTH_SHORT).show();
+                return;
             }
+            playerService.togglePlayPause();
         });
 
         btnRewind.setOnClickListener(v -> {
-            currentLineIndex = Math.max(0, currentLineIndex - 2);
-            updatePlaybackProgress();
-            if (isPlaying) speakCurrentLine();
+            if (playerService != null) playerService.rewind();
         });
 
         btnFF.setOnClickListener(v -> {
-            if (!dialogueLines.isEmpty()) {
-                currentLineIndex = Math.min(dialogueLines.size() - 1, currentLineIndex + 2);
-                updatePlaybackProgress();
-                if (isPlaying) speakCurrentLine();
-            }
+            if (playerService != null) playerService.fastForward();
+        });
+
+        btnPrev.setOnClickListener(v -> {
+            if (playerService != null) playerService.prevLine();
+        });
+
+        btnNext.setOnClickListener(v -> {
+            if (playerService != null) playerService.nextLine();
         });
 
         btnSpeed075.setOnClickListener(v -> changeSpeed(0.75f, btnSpeed075));
@@ -345,6 +279,24 @@ public class PodcastPlayerActivity extends AppCompatActivity {
         btnSpeed125.setOnClickListener(v -> changeSpeed(1.25f, btnSpeed125));
         btnSpeed150.setOnClickListener(v -> changeSpeed(1.5f,  btnSpeed150));
         btnSpeed200.setOnClickListener(v -> changeSpeed(2.0f,  btnSpeed200));
+
+        // ── Seek by tapping the progress track ────────────────────────────
+        if (progressTrack != null) {
+            progressTrack.setOnTouchListener((v, event) -> {
+                if (event.getAction() == android.view.MotionEvent.ACTION_UP
+                        || event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
+                    if (playerService == null || !playerService.isTtsReady()) return true;
+                    int totalLines = playerService.getTotalLines();
+                    if (totalLines == 0) return true;
+                    float fraction = event.getX() / v.getWidth();
+                    if (fraction < 0f) fraction = 0f;
+                    if (fraction > 1f) fraction = 1f;
+                    int targetLine = (int) (fraction * totalLines);
+                    playerService.seekToLine(targetLine);
+                }
+                return true;
+            });
+        }
 
         // Tactile press feedback
         com.example.scholarapp.utils.TouchFeedbackUtils.applyScaleFeedback(btnPlayPause);
@@ -355,10 +307,9 @@ public class PodcastPlayerActivity extends AppCompatActivity {
     }
 
     private void changeSpeed(float speed, TextView activeBtn) {
-        playbackSpeed = speed;
-        if (tts != null) tts.setSpeechRate(playbackSpeed);
+        if (playerService != null) playerService.setSpeed(speed);
 
-        int unselectedColor = 0xFF9EA8CC;
+        int unselectedColor = androidx.core.content.ContextCompat.getColor(this, R.color.text_secondary);
         btnSpeed075.setBackgroundResource(R.drawable.player_speed_unselected); btnSpeed075.setTextColor(unselectedColor);
         btnSpeed100.setBackgroundResource(R.drawable.player_speed_unselected); btnSpeed100.setTextColor(unselectedColor);
         btnSpeed125.setBackgroundResource(R.drawable.player_speed_unselected); btnSpeed125.setTextColor(unselectedColor);
@@ -366,85 +317,66 @@ public class PodcastPlayerActivity extends AppCompatActivity {
         btnSpeed200.setBackgroundResource(R.drawable.player_speed_unselected); btnSpeed200.setTextColor(unselectedColor);
 
         activeBtn.setBackgroundResource(R.drawable.player_speed_selected);
-        activeBtn.setTextColor(0xFFFFFFFF);
-
-        if (isPlaying) speakCurrentLine();
+        activeBtn.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
     }
 
-    // ── Core speech ────────────────────────────────────────────────────────
+    // ──────────────────────────────────────────────────────────────────────
+    //  UI update helpers
+    // ──────────────────────────────────────────────────────────────────────
     /**
-     * Applies the correct voice + pitch for the current speaker, then
-     * speaks the line text via Android TTS.
+     * Smooth progress: uses elapsed milliseconds (with intra-line interpolation)
+     * when data is available, falls back to discrete line-count otherwise.
      */
-    private void speakCurrentLine() {
-        if (tts == null || !isTtsReady || dialogueLines.isEmpty()) return;
-        if (currentLineIndex >= dialogueLines.size()) return;
+    private void updatePlaybackProgress(int lineIndex) {
+        if (playerService == null) return;
+        int totalLines = playerService.getTotalLines();
+        if (totalLines == 0) return;
 
-        DialogueLine line = dialogueLines.get(currentLineIndex);
+        int totalMs   = playerService.getTotalEstimatedMs();
+        int elapsedMs = playerService.getElapsedMs();
 
-        // ── Switch voice per speaker ───────────────────────────────────────
-        if ("Alice".equals(line.speaker)) {
-            if (aliceVoice != null) {
-                tts.setVoice(aliceVoice);
-            }
-            tts.setPitch(1.15f);   // Slightly higher, bright tone
+        float ratio;
+        int elapsedSec;
+        int totalSec;
+
+        if (totalMs > 0) {
+            ratio      = Math.min(1f, (float) elapsedMs / totalMs);
+            elapsedSec = elapsedMs / 1000;
+            totalSec   = totalMs  / 1000;
         } else {
-            if (bobVoice != null) {
-                tts.setVoice(bobVoice);
-            }
-            tts.setPitch(0.85f);   // Slightly lower, deep tone
+            // Fallback — plain line ratio (~4 s/line)
+            ratio      = (float) lineIndex / totalLines;
+            elapsedSec = lineIndex  * 4;
+            totalSec   = totalLines * 4;
         }
-        tts.setSpeechRate(playbackSpeed);
-
-        Bundle params = new Bundle();
-        params.putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "line_" + currentLineIndex);
-        tts.speak(line.text, TextToSpeech.QUEUE_FLUSH, params, "line_" + currentLineIndex);
-    }
-
-    // ── UI updates ─────────────────────────────────────────────────────────
-    private void updatePlaybackProgress() {
-        if (dialogueLines.isEmpty()) return;
-
-        float ratio = (float) currentLineIndex / dialogueLines.size();
-
-        // Time estimate: ~4 sec per line
-        int totalSec   = dialogueLines.size() * 4;
-        int elapsedSec = currentLineIndex * 4;
 
         tvCurrentTime.setText(String.format(Locale.getDefault(), "%02d:%02d",
                 elapsedSec / 60, elapsedSec % 60));
         tvTotalTime.setText(String.format(Locale.getDefault(), "%02d:%02d",
                 totalSec / 60, totalSec % 60));
 
-        // Progress bar
         if (progressFill != null) {
+            final float finalRatio = ratio;
             ViewGroup.LayoutParams lp = progressFill.getLayoutParams();
             progressFill.post(() -> {
                 View parent = (View) progressFill.getParent();
                 if (parent != null) {
-                    lp.width = (int) (parent.getWidth() * ratio);
+                    lp.width = (int) (parent.getWidth() * finalRatio);
                     progressFill.setLayoutParams(lp);
                 }
             });
-        }
-
-        // Transcript + speaker label with smooth fade
-        if (currentLineIndex < dialogueLines.size()) {
-            DialogueLine line = dialogueLines.get(currentLineIndex);
-            updateTranscriptDisplay(line);
         }
     }
 
     /**
      * Fades out the old transcript text, switches content & speaker label,
-     * then fades back in.
+     * then fades back in. Unchanged from original activity.
      */
-    private void updateTranscriptDisplay(DialogueLine line) {
+    private void updateTranscriptDisplay(PodcastPlayerService.DialogueLine line) {
         boolean isAlice = "Alice".equals(line.speaker);
 
-        // Speaker badge colours: Alice = purple, Bob = teal
-        int labelColor  = isAlice ? 0xFF7C3AED : 0xFF0D9488;
-        String badge    = isAlice ? "🎙 Alice" : "🎙 Bob";
+        int labelColor = isAlice ? 0xFF7C3AED : 0xFF0D9488;
+        String badge   = isAlice ? "🎙 Alice" : "🎙 Bob";
 
         if (tvSpeakerLabel != null) {
             tvSpeakerLabel.setText(badge);
@@ -469,7 +401,9 @@ public class PodcastPlayerActivity extends AppCompatActivity {
         }
     }
 
-    // ── Ring-pulse helpers ─────────────────────────────────────────────────
+    // ──────────────────────────────────────────────────────────────────────
+    //  Ring-pulse animation — unchanged from original
+    // ──────────────────────────────────────────────────────────────────────
     private void startRingPulse() {
         if (ringPulseAnimator == null) {
             ringPulseAnimator = android.animation.ValueAnimator.ofFloat(0f, 1f);
@@ -497,16 +431,5 @@ public class PodcastPlayerActivity extends AppCompatActivity {
         if (ringPulseAnimator != null) ringPulseAnimator.cancel();
         if (micRingOuter != null) micRingOuter.setAlpha(0f);
         if (micRingInner != null) micRingInner.setAlpha(0f);
-    }
-
-    // ── Lifecycle ──────────────────────────────────────────────────────────
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        stopRingPulse();
-        if (tts != null) {
-            tts.stop();
-            tts.shutdown();
-        }
     }
 }

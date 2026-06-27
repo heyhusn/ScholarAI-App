@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/surface_base">
 
     <LinearLayout
         android:id="@+id/browserBar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#F3F4F6"
+        android:background="@color/surface_base"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="12dp"
@@ -23,7 +23,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:text="←"
             android:textSize="20sp"
-            android:textColor="#555555"
+            android:textColor="@color/text_secondary"
             android:gravity="center" />
 
         <LinearLayout
@@ -31,7 +31,7 @@
             android:layout_height="36dp"
             android:layout_weight="1"
             android:layout_marginHorizontal="8dp"
-            android:background="#E5E7EB"
+            android:background="@color/border_subtle"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="12dp">
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:text="arxiv.org/abs/1409.0473"
-                android:textColor="#333333"
+                android:textColor="@color/text_primary"
                 android:textSize="13sp"
                 android:maxLines="1"
                 android:ellipsize="end"/>
@@ -62,7 +62,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:text="↻"
             android:textSize="20sp"
-            android:textColor="#555555"
+            android:textColor="@color/text_secondary"
             android:gravity="center" />
 
         <TextView
@@ -72,7 +72,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:text="✕"
             android:textSize="18sp"
-            android:textColor="#555555"
+            android:textColor="@color/text_secondary"
             android:gravity="center" />
     </LinearLayout>
 
@@ -89,10 +89,10 @@
         android:layout_height="54dp"
         android:layout_margin="20dp"
         android:text="Open Full Paper ↗"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:backgroundTint="#2563EB"
+        app:backgroundTint="@color/accent_primary"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 

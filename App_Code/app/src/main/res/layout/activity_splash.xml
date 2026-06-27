@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Scholar"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="32sp"
             android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mind"
-            android:textColor="#99FFFFFF"
+            android:textColor="@color/text_muted"
             android:textSize="32sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Making Research Easy with AI"
-        android:textColor="#B3FFFFFF"
+        android:textColor="@color/text_secondary"
         android:textSize="14sp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@id/indicatorLayout"
@@ -123,7 +123,7 @@
         android:text="Get Started"
         android:textAllCaps="false"
         android:textSize="16sp"
-        app:backgroundTint="#2B44FF"
+        app:backgroundTint="@color/accent_primary"
         app:cornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@id/tvSignIn" />
 
@@ -133,7 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:text="Already have an account? Sign In"
-        android:textColor="#B3FFFFFF"
+        android:textColor="@color/text_secondary"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

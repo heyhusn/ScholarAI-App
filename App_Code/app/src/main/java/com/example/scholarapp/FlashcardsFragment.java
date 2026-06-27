@@ -11,11 +11,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+
+import com.example.scholarapp.models.PaperAnalysisResponse;
+import com.example.scholarapp.models.PaperSection;
 import com.example.scholarapp.utils.PaperLocalStore;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FlashcardsFragment extends BottomSheetDialogFragment {
 
@@ -52,7 +57,16 @@ public class FlashcardsFragment extends BottomSheetDialogFragment {
         }
 
         bindViews(view);
-        loadDefaultCards();
+
+        if (paperId != null && !paperId.isEmpty()) {
+            PaperAnalysisResponse analysis = PaperLocalStore.getCachedAnalysis(requireContext(), paperId);
+            if (analysis != null) {
+                loadDynamicCards(analysis);
+            }
+        }
+        if (flashcards.isEmpty()) {
+            loadDefaultCards();
+        }
         displayCard();
 
         return view;
@@ -149,6 +163,76 @@ public class FlashcardsFragment extends BottomSheetDialogFragment {
         }
     }
 
+    private void loadDynamicCards(PaperAnalysisResponse analysis) {
+        flashcards.clear();
+
+        // 1. Core Summary / Abstract Card
+        String summary = analysis.getAiOverviewBody();
+        if (summary == null || summary.trim().isEmpty()) {
+            summary = analysis.getAbstractText();
+        }
+        if (summary != null && !summary.trim().isEmpty()) {
+            flashcards.add(new String[]{
+                "Core Focus & Summary",
+                summary
+            });
+        }
+
+        // 2. Methodology Card
+        String method = analysis.getMethodology();
+        if (method != null && !method.trim().isEmpty()) {
+            flashcards.add(new String[]{
+                "Methodology & Approach",
+                method
+            });
+        }
+
+        // 3. Results Card
+        String results = analysis.getResults();
+        if (results != null && !results.trim().isEmpty()) {
+            flashcards.add(new String[]{
+                "Key Findings & Results",
+                results
+            });
+        }
+
+        // 4. Conclusion Card
+        String conclusion = analysis.getConclusion();
+        if (conclusion != null && !conclusion.trim().isEmpty()) {
+            flashcards.add(new String[]{
+                "Main Conclusion",
+                conclusion
+            });
+        }
+
+        // 5. Section Cards
+        if (analysis.getSections() != null) {
+            for (PaperSection section : analysis.getSections()) {
+                String sectionTitle = section.getTitle();
+                String sectionContent = section.getContent();
+
+                if (sectionTitle == null || sectionContent == null || sectionContent.trim().isEmpty()) {
+                    continue;
+                }
+
+                String lowerTitle = sectionTitle.toLowerCase(Locale.US);
+                if (lowerTitle.contains("abstract") || lowerTitle.contains("methodology") || lowerTitle.contains("conclusion")) {
+                    continue;
+                }
+
+                String truncatedContent = sectionContent;
+                if (truncatedContent.length() > 300) {
+                    truncatedContent = truncatedContent.substring(0, 297) + "...";
+                }
+
+                flashcards.add(new String[]{
+                    sectionTitle,
+                    truncatedContent
+                });
+            }
+        }
+    }
+
     private void displayCard() {
         if (flashcards.isEmpty() || !isAdded()) return;
 
@@ -159,15 +243,15 @@ public class FlashcardsFragment extends BottomSheetDialogFragment {
         if (isShowingFront) {
             tvCardLabel.setText("TERM");
             tvCardContent.setText(card[0]);
-            cardFlip.setCardBackgroundColor(0xFF1A1A2E);
-            tvCardLabel.setTextColor(0xFF4A90D9);
-            tvCardContent.setTextColor(0xFFFFFFFF);
+            cardFlip.setCardBackgroundColor(color(R.color.surface_card));
+            tvCardLabel.setTextColor(color(R.color.accent_gold));
+            tvCardContent.setTextColor(color(R.color.text_primary));
         } else {
             tvCardLabel.setText("DEFINITION");
             tvCardContent.setText(card[1]);
-            cardFlip.setCardBackgroundColor(0xFFFFFFFF);
-            tvCardLabel.setTextColor(0xFF4A90D9);
-            tvCardContent.setTextColor(0xFF1A1A2E);
+            cardFlip.setCardBackgroundColor(color(R.color.surface_elevated));
+            tvCardLabel.setTextColor(color(R.color.accent_gold));
+            tvCardContent.setTextColor(color(R.color.text_primary));
         }
 
         btnPrev.setAlpha(currentIndex == 0 ? 0.4f : 1f);
@@ -195,5 +279,9 @@ public class FlashcardsFragment extends BottomSheetDialogFragment {
                             .start();
                 })
                 .start();
+    }
+
+    private int color(int resId) {
+        return ContextCompat.getColor(requireContext(), resId);
     }
 }

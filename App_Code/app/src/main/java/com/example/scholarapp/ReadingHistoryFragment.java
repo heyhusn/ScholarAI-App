@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.scholarapp.FirebaseManager;
@@ -87,7 +88,7 @@ public class ReadingHistoryFragment extends Fragment {
         CardView card = new CardView(requireContext());
         card.setRadius(16f);
         card.setCardElevation(4f);
-        card.setCardBackgroundColor(0xFFFFFFFF);
+        card.setCardBackgroundColor(color(R.color.surface_card));
         card.setClickable(true);
         card.setFocusable(true);
 
@@ -107,7 +108,7 @@ public class ReadingHistoryFragment extends Fragment {
         TextView tvTitle = new TextView(requireContext());
         tvTitle.setText(title != null ? title : "Untitled");
         tvTitle.setTextSize(15f);
-        tvTitle.setTextColor(0xFF1A1A2E);
+        tvTitle.setTextColor(color(R.color.text_primary));
         tvTitle.setTypeface(null, android.graphics.Typeface.BOLD);
         tvTitle.setMaxLines(2);
         tvTitle.setEllipsize(android.text.TextUtils.TruncateAt.END);
@@ -118,7 +119,7 @@ public class ReadingHistoryFragment extends Fragment {
         String authorYear = (author != null ? author : "") + (year != null ? " · " + year : "");
         tvAuthor.setText(authorYear);
         tvAuthor.setTextSize(13f);
-        tvAuthor.setTextColor(0xFF888888);
+        tvAuthor.setTextColor(color(R.color.text_secondary));
         tvAuthor.setPadding(0, 6, 0, 0);
         inner.addView(tvAuthor);
 
@@ -129,13 +130,13 @@ public class ReadingHistoryFragment extends Fragment {
         metaRow.setGravity(android.view.Gravity.CENTER_VERTICAL);
 
         if (category != null) {
-            TextView tvCategory = makeChip(category, 0xFF4A90D9);
+            TextView tvCategory = makeChip(category, color(R.color.accent_primary));
             metaRow.addView(tvCategory);
         }
 
         if (status != null) {
-            int chipColor = status.equals("done") ? 0xFF27AE60 :
-                    status.equals("error") ? 0xFFE74C3C : 0xFFF39C12;
+            int chipColor = status.equals("done") ? color(R.color.accent_success) :
+                    status.equals("error") ? color(R.color.accent_error) : color(R.color.accent_warning);
             TextView tvStatus = makeChip(status, chipColor);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -157,7 +158,7 @@ public class ReadingHistoryFragment extends Fragment {
             TextView tvDate = new TextView(requireContext());
             tvDate.setText(DATE_FORMAT.format(new Date(created)));
             tvDate.setTextSize(12f);
-            tvDate.setTextColor(0xFFAAAAAA);
+            tvDate.setTextColor(color(R.color.text_muted));
             metaRow.addView(tvDate);
         }
 
@@ -202,9 +203,13 @@ public class ReadingHistoryFragment extends Fragment {
         TextView chip = new TextView(requireContext());
         chip.setText(label);
         chip.setTextSize(11f);
-        chip.setTextColor(0xFFFFFFFF);
+        chip.setTextColor(color(R.color.text_primary));
         chip.setPadding(20, 8, 20, 8);
         chip.setBackgroundColor(color);
         return chip;
+    }
+
+    private int color(int resId) {
+        return ContextCompat.getColor(requireContext(), resId);
     }
 }

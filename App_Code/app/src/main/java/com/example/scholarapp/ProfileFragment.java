@@ -1,8 +1,6 @@
 package com.example.scholarapp;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -27,7 +24,7 @@ public class ProfileFragment extends Fragment {
     private TextView tvPapersCount;
     private TextView tvLoading;
     private TextView btnSignOut;
-    private SwitchMaterial switchDarkMode;
+    private SwitchMaterial switchNotifications;
     private LinearLayout statUploads;
 
     @Nullable
@@ -47,22 +44,11 @@ public class ProfileFragment extends Fragment {
         tvPapersCount = view.findViewById(R.id.tvPapersCount);
         tvLoading = view.findViewById(R.id.tvLoading);
         btnSignOut = view.findViewById(R.id.btnSignOut);
-        switchDarkMode = view.findViewById(R.id.switchDarkMode);
+        switchNotifications = view.findViewById(R.id.switchNotifications);
         statUploads = view.findViewById(R.id.statUploads);
 
         btnSignOut.setOnClickListener(v -> signOut());
         statUploads.setOnClickListener(v -> openUploads());
-
-        SharedPreferences prefs = requireContext().getSharedPreferences("ScholarMindPrefs", Context.MODE_PRIVATE);
-        boolean isDarkMode = prefs.getBoolean("dark_mode", false);
-        switchDarkMode.setChecked(isDarkMode);
-
-        switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            prefs.edit().putBoolean("dark_mode", isChecked).apply();
-            AppCompatDelegate.setDefaultNightMode(
-                    isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
-            );
-        });
     }
 
     private void loadProfile() {

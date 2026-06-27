@@ -339,12 +339,12 @@ public class SummaryActivity extends AppCompatActivity {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(60, 60, 60, 60);
-        layout.setBackgroundColor(0xFFFFFFFF);
+        layout.setBackgroundColor(androidx.core.content.ContextCompat.getColor(this, R.color.surface_card));
 
         TextView tvTitle = new TextView(this);
         tvTitle.setText(title);
         tvTitle.setTextSize(20f);
-        tvTitle.setTextColor(0xFF0D1B4B);
+        tvTitle.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
         tvTitle.setTypeface(null, android.graphics.Typeface.BOLD);
         tvTitle.setPadding(0, 0, 0, 30);
         layout.addView(tvTitle);
@@ -353,7 +353,7 @@ public class SummaryActivity extends AppCompatActivity {
         TextView tvContent = new TextView(this);
         tvContent.setText(content);
         tvContent.setTextSize(14f);
-        tvContent.setTextColor(0xFF374151);
+        tvContent.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_secondary));
         tvContent.setLineSpacing(0f, 1.4f);
         scrollView.addView(tvContent);
 

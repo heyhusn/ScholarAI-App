@@ -29,7 +29,7 @@
                 android:layout_gravity="center"
                 android:text="←"
                 android:textSize="16sp"
-                android:textColor="#FFFFFF"/>
+                android:textColor="@color/text_primary"/>
         </FrameLayout>
 
         <TextView
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0/5 PDFs"
-                android:textColor="#3A5CFF"
+                android:textColor="@color/accent_primary"
                 android:textSize="11sp"
                 android:textStyle="bold"/>
         </LinearLayout>
@@ -155,7 +155,7 @@
                     android:layout_marginTop="6dp"
                     android:text="— or —"
                     android:textSize="11sp"
-                    android:textColor="#9CA3AF"
+                    android:textColor="@color/text_muted"
                     android:gravity="center"/>
 
                 <!--  Browse button  -->
@@ -166,7 +166,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Browse Files"
                     android:textSize="13sp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:gravity="center"
                     android:background="@drawable/splash_btn_bg"
                     android:textStyle="bold"
@@ -203,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:text="1 of 5"
                         android:textSize="12sp"
-                        android:textColor="#3A5CFF"/>
+                        android:textColor="@color/accent_primary"/>
                 </LinearLayout>
 
                 <!-- Uploaded file cards will be added here dynamically -->
@@ -237,7 +237,7 @@
             android:text="🚀  Smart Analyze"
             android:textSize="16sp"
             android:letterSpacing="0.01"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:gravity="center"
             android:background="@drawable/splash_btn_bg"
             android:textStyle="bold"

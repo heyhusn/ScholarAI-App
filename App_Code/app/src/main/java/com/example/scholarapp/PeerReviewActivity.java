@@ -249,7 +249,7 @@ public class PeerReviewActivity extends AppCompatActivity {
         if (items == null || items.isEmpty()) {
             TextView emptyTv = new TextView(this);
             emptyTv.setText("None identified.");
-            emptyTv.setTextColor(0xFF6B7280); // gray
+            emptyTv.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_secondary));
             emptyTv.setTextSize(14);
             container.addView(emptyTv);
             return;
@@ -264,7 +264,7 @@ public class PeerReviewActivity extends AppCompatActivity {
             } else {
                 tv.setText(prefix + item);
             }
-            tv.setTextColor(0xFF1F2937); // dark gray
+            tv.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
             tv.setTextSize(14);
             tv.setPadding(0, 6, 0, 6);
             tv.setLineSpacing(3, 1);

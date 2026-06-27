@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="@color/surface_base">
 
 
 
@@ -22,14 +22,14 @@
             android:id="@+id/btnBack"
             android:layout_width="34dp"
             android:layout_height="34dp"
-            android:background="#F3F4F6">
+            android:background="@color/surface_base">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="←"
                 android:textSize="16sp"
-                android:textColor="#374151"/>
+                android:textColor="@color/text_muted"/>
         </FrameLayout>
 
         <LinearLayout
@@ -46,7 +46,7 @@
                 android:text="Explain Paper"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#0F1117"
+                android:textColor="@color/text_primary"
                 android:transitionName="paper_title_transition"
                 android:ellipsize="end"
                 android:maxLines="1"/>
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="Choose how you want to understand this paper"
                 android:textSize="12sp"
-                android:textColor="#6B7280"
+                android:textColor="@color/text_secondary"
                 android:ellipsize="end"
                 android:maxLines="1"/>
         </LinearLayout>
@@ -90,11 +90,11 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:background="#ECFDF5">
+                    android:background="@color/surface_elevated">
                     <TextView android:layout_width="match_parent" android:layout_height="30dp" android:text="🎓" android:textSize="30sp"/>
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:text="Beginner Mode" android:textSize="16sp" android:textStyle="bold" android:textColor="#065F46"/>
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:layout_marginBottom="7dp" android:text="Plain language, everyday analogies, no technical jargon. Perfect for first-time readers." android:textSize="12sp" android:lineSpacingMultiplier="1.5" android:textColor="#6B7280"/>
-                    <TextView android:id="@+id/btnSelectBeginner" android:layout_width="120dp" android:layout_height="26dp" android:text="Select Beginner →" android:textSize="11sp" android:textColor="#065F46" android:gravity="center" android:background="#D1FAE5"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:text="Beginner Mode" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/accent_success"/>
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:layout_marginBottom="7dp" android:text="Plain language, everyday analogies, no technical jargon. Perfect for first-time readers." android:textSize="12sp" android:lineSpacingMultiplier="1.5" android:textColor="@color/text_secondary"/>
+                    <TextView android:id="@+id/btnSelectBeginner" android:layout_width="120dp" android:layout_height="26dp" android:text="Select Beginner →" android:textSize="11sp" android:textColor="@color/accent_success" android:gravity="center" android:background="@color/surface_elevated"/>
                 </LinearLayout>
 
                 <TextView
@@ -104,11 +104,11 @@
                     android:layout_margin="9dp"
                     android:text="⭐ Recommended"
                     android:textSize="9sp"
-                    android:textColor="#065F46"
+                    android:textColor="@color/accent_success"
                     android:paddingStart="7dp"
                     android:paddingEnd="7dp"
                     android:gravity="center_vertical"
-                    android:background="#A7F3D0"/>
+                    android:background="@color/surface_elevated"/>
             </FrameLayout>
 
             <!--  ── TECHNICAL MODE CARD ──  -->
@@ -119,11 +119,11 @@
                 android:layout_marginBottom="11dp"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:background="#EFF6FF">
+                android:background="@color/surface_elevated">
                 <TextView android:layout_width="match_parent" android:layout_height="30dp" android:text="🔬" android:textSize="30sp"/>
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:text="Technical Mode" android:textSize="16sp" android:textStyle="bold" android:textColor="#1E3FE8"/>
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:layout_marginBottom="7dp" android:text="Full academic depth with equations, methodology analysis, and expert-level explanations." android:textSize="12sp" android:lineSpacingMultiplier="1.5" android:textColor="#6B7280"/>
-                <TextView android:id="@+id/btnSelectTechnical" android:layout_width="122dp" android:layout_height="26dp" android:text="Select Technical →" android:textSize="11sp" android:textColor="#1E3FE8" android:gravity="center" android:background="#DBEAFE"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:text="Technical Mode" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/accent_primary"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:layout_marginBottom="7dp" android:text="Full academic depth with equations, methodology analysis, and expert-level explanations." android:textSize="12sp" android:lineSpacingMultiplier="1.5" android:textColor="@color/text_secondary"/>
+                <TextView android:id="@+id/btnSelectTechnical" android:layout_width="122dp" android:layout_height="26dp" android:text="Select Technical →" android:textSize="11sp" android:textColor="@color/accent_primary" android:gravity="center" android:background="@color/surface_elevated"/>
             </LinearLayout>
 
             <!--  ── PODCAST MODE CARD ──  -->
@@ -134,11 +134,11 @@
                 android:layout_marginBottom="11dp"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:background="#FFF7ED">
+                android:background="@color/surface_elevated">
                 <TextView android:layout_width="match_parent" android:layout_height="30dp" android:text="🎙️" android:textSize="30sp"/>
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:text="Podcast Mode" android:textSize="16sp" android:textStyle="bold" android:textColor="#C2410C"/>
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:layout_marginBottom="7dp" android:text="AI-narrated audio explanation. Listen while commuting or relaxing, hands-free." android:textSize="12sp" android:lineSpacingMultiplier="1.5" android:textColor="#6B7280"/>
-                <TextView android:id="@+id/btnSelectPodcast" android:layout_width="122dp" android:layout_height="26dp" android:text="Select Podcast →" android:textSize="11sp" android:textColor="#C2410C" android:gravity="center" android:background="#FFEDD5"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="3dp" android:text="Podcast Mode" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/accent_warning"/>
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:layout_marginBottom="7dp" android:text="AI-narrated audio explanation. Listen while commuting or relaxing, hands-free." android:textSize="12sp" android:lineSpacingMultiplier="1.5" android:textColor="@color/text_secondary"/>
+                <TextView android:id="@+id/btnSelectPodcast" android:layout_width="122dp" android:layout_height="26dp" android:text="Select Podcast →" android:textSize="11sp" android:textColor="@color/accent_warning" android:gravity="center" android:background="@color/surface_elevated"/>
             </LinearLayout>
 
 

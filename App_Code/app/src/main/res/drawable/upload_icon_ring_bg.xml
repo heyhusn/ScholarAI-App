@@ -4,7 +4,7 @@
     <gradient
         android:type="radial"
         android:gradientRadius="40dp"
-        android:startColor="#E8EDFF"
-        android:endColor="#C7D3FF"/>
-    <stroke android:width="2dp" android:color="#A5B4FC"/>
+        android:startColor="@color/surface_elevated"
+        android:endColor="@color/surface_card"/>
+    <stroke android:width="2dp" android:color="@color/accent_gold"/>
 </shape>

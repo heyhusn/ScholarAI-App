@@ -269,7 +269,7 @@ public class AddReferencesActivity extends AppCompatActivity {
         if (references == null || references.isEmpty()) {
             TextView emptyTv = new TextView(this);
             emptyTv.setText("No references generated.");
-            emptyTv.setTextColor(0xFF6B7280);
+            emptyTv.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_secondary));
             emptyTv.setTextSize(14);
             layoutReferencesList.addView(emptyTv);
             return;

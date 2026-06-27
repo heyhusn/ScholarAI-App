@@ -133,7 +133,7 @@ public class BeginnerModeActivity extends AppCompatActivity {
             chip.setText(question);
             chip.setPadding(40, 20, 40, 20);
             chip.setTextSize(14f);
-            chip.setTextColor(0xFF1A1A2E);
+            chip.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
             chip.setBackground(getDrawable(R.drawable.bg_question_chip));
             chip.setClickable(true);
             chip.setFocusable(true);
@@ -219,7 +219,8 @@ public class BeginnerModeActivity extends AppCompatActivity {
         CardView card = new CardView(this);
         card.setRadius(24f);
         card.setCardElevation(4f);
-        card.setCardBackgroundColor(isUser ? 0xFF4A90D9 : 0xFFFFFFFF);
+        card.setCardBackgroundColor(androidx.core.content.ContextCompat.getColor(this,
+                isUser ? R.color.accent_primary : R.color.surface_card));
 
         LinearLayout.LayoutParams cardLp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -231,7 +232,7 @@ public class BeginnerModeActivity extends AppCompatActivity {
         TextView tvMsg = new TextView(this);
         tvMsg.setText(message);
         tvMsg.setTextSize(15f);
-        tvMsg.setTextColor(isUser ? 0xFFFFFFFF : 0xFF1A1A2E);
+        tvMsg.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
         tvMsg.setPadding(32, 24, 32, 24);
         tvMsg.setMaxWidth(900);
         card.addView(tvMsg);
@@ -239,7 +240,7 @@ public class BeginnerModeActivity extends AppCompatActivity {
         TextView tvTime = new TextView(this);
         tvTime.setText(TIME_FORMAT.format(new Date()));
         tvTime.setTextSize(11f);
-        tvTime.setTextColor(0xFF888888);
+        tvTime.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_muted));
         tvTime.setPadding(isUser ? 0 : 8, 4, isUser ? 8 : 0, 0);
         tvTime.setGravity(isUser ? android.view.Gravity.END : android.view.Gravity.START);
 

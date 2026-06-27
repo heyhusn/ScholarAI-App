@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -131,19 +132,19 @@ public class HomeActivity extends AppCompatActivity {
                     selectedFragment.setArguments(args);
                 }
                 btnNavHome.setAlpha(1.0f);
-                tvNavHome.setTextColor(0xFF3A5CFF);
+                tvNavHome.setTextColor(color(R.color.accent_primary));
                 indicatorHome.setVisibility(View.VISIBLE);
                 break;
             case TAB_HISTORY:
                 selectedFragment = new ReadingHistoryFragment();
                 btnNavHistory.setAlpha(1.0f);
-                tvNavHistory.setTextColor(0xFF3A5CFF);
+                tvNavHistory.setTextColor(color(R.color.accent_primary));
                 indicatorHistory.setVisibility(View.VISIBLE);
                 break;
             case TAB_PROFILE:
                 selectedFragment = new ProfileFragment();
                 btnNavProfile.setAlpha(1.0f);
-                tvNavProfile.setTextColor(0xFF3A5CFF);
+                tvNavProfile.setTextColor(color(R.color.accent_primary));
                 indicatorProfile.setVisibility(View.VISIBLE);
                 break;
         }
@@ -165,7 +166,7 @@ public class HomeActivity extends AppCompatActivity {
         btnNavProfile.setAlpha(0.35f);
 
         // Reset Text Color
-        int defaultColor = 0xFF374151; // #374151
+        int defaultColor = color(R.color.text_muted);
         tvNavHome.setTextColor(defaultColor);
         tvNavHistory.setTextColor(defaultColor);
         tvNavCards.setTextColor(defaultColor);
@@ -176,5 +177,9 @@ public class HomeActivity extends AppCompatActivity {
         indicatorHistory.setVisibility(View.INVISIBLE);
         indicatorCards.setVisibility(View.INVISIBLE);
         indicatorProfile.setVisibility(View.INVISIBLE);
+    }
+
+    private int color(int resId) {
+        return ContextCompat.getColor(this, resId);
     }
 }

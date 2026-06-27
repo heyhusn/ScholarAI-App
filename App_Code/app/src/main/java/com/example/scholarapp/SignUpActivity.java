@@ -107,7 +107,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                         fStore.collection("users").document(userId).set(userProfile)
                                 .addOnSuccessListener(aVoid -> {
-                                    startActivity(new Intent(SignUpActivity.this, UploadActivity.class));
+                                    startActivity(new Intent(SignUpActivity.this, DashboardActivity.class));
                                     finish();
                                 })
                                 .addOnFailureListener(e -> {
@@ -134,13 +134,13 @@ public class SignUpActivity extends AppCompatActivity {
 
                         fStore.collection("users").document(userId).set(userProfile)
                                 .addOnSuccessListener(aVoid -> {
-                                    startActivity(new Intent(SignUpActivity.this, UploadActivity.class));
+                                    startActivity(new Intent(SignUpActivity.this, DashboardActivity.class));
                                     finish();
                                 })
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(SignUpActivity.this, "Firestore Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                                    // Proceed to UploadActivity regardless since Auth was successful
-                                    startActivity(new Intent(SignUpActivity.this, UploadActivity.class));
+                                    // Proceed to DashboardActivity regardless since Auth was successful
+                                    startActivity(new Intent(SignUpActivity.this, DashboardActivity.class));
                                     finish();
                                 });
                     } else {

@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Scholar"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/text_primary"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mind"
-                    android:textColor="#99FFFFFF"
+                    android:textColor="@color/accent_gold"
                     android:textSize="28sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="What would you like to do?"
-                android:textColor="#CCE0FFFF"
+                android:textColor="@color/text_secondary"
                 android:textSize="15sp"
                 android:layout_marginBottom="36dp" />
 
@@ -82,7 +82,7 @@
                 android:focusable="true"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="6dp"
-                app:cardBackgroundColor="#FFFFFFFF">
+                app:cardBackgroundColor="@color/surface_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -118,7 +118,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Easy Paper Understanding"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -126,7 +126,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Upload &amp; analyze research papers with AI"
-                            android:textColor="#6B7280"
+                            android:textColor="@color/text_secondary"
                             android:textSize="13sp"
                             android:layout_marginTop="4dp" />
                     </LinearLayout>
@@ -136,7 +136,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="›"
-                        android:textColor="#3A5CFF"
+                        android:textColor="@color/accent_gold"
                         android:textSize="28sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -153,7 +153,7 @@
                 android:focusable="true"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="6dp"
-                app:cardBackgroundColor="#FFFFFFFF">
+                app:cardBackgroundColor="@color/surface_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -187,7 +187,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Add References"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -195,7 +195,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Manage citations &amp; build reference lists"
-                            android:textColor="#6B7280"
+                            android:textColor="@color/text_secondary"
                             android:textSize="13sp"
                             android:layout_marginTop="4dp" />
                     </LinearLayout>
@@ -204,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="›"
-                        android:textColor="#3A5CFF"
+                        android:textColor="@color/accent_gold"
                         android:textSize="28sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -221,7 +221,7 @@
                 android:focusable="true"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="6dp"
-                app:cardBackgroundColor="#FFFFFFFF">
+                app:cardBackgroundColor="@color/surface_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -255,7 +255,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Peer Review"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -263,7 +263,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Get AI-powered peer review feedback"
-                            android:textColor="#6B7280"
+                            android:textColor="@color/text_secondary"
                             android:textSize="13sp"
                             android:layout_marginTop="4dp" />
                     </LinearLayout>
@@ -272,7 +272,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="›"
-                        android:textColor="#3A5CFF"
+                        android:textColor="@color/accent_gold"
                         android:textSize="28sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -289,7 +289,7 @@
                 android:focusable="true"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="6dp"
-                app:cardBackgroundColor="#FFFFFFFF">
+                app:cardBackgroundColor="@color/surface_card">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -323,7 +323,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Search for Papers"
-                            android:textColor="#0D1B4B"
+                            android:textColor="@color/text_primary"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -331,7 +331,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Discover &amp; explore academic literature"
-                            android:textColor="#6B7280"
+                            android:textColor="@color/text_secondary"
                             android:textSize="13sp"
                             android:layout_marginTop="4dp" />
                     </LinearLayout>
@@ -340,7 +340,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="›"
-                        android:textColor="#3A5CFF"
+                        android:textColor="@color/accent_gold"
                         android:textSize="28sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -353,7 +353,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Sign Out"
-                android:textColor="#99FFFFFF"
+                android:textColor="@color/text_muted"
                 android:textSize="14sp"
                 android:paddingVertical="8dp"
                 android:paddingHorizontal="24dp" />

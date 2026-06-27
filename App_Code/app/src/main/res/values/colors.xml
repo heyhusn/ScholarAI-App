@@ -3,21 +3,46 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Theme Background Colors -->
-    <color name="bg_app">#F5F7FF</color>
-    <color name="bg_card">#FFFFFF</color>
-    <color name="bg_top_bar">#FFFFFF</color>
-    
-    <!-- Theme Text Colors -->
-    <color name="text_primary">#0D1B4B</color>
-    <color name="text_secondary">#6B7280</color>
-    <color name="divider_color">#E5E7EB</color>
-    <color name="card_border">#E5E7EB</color>
-    
-    <!-- Specific screen overrides -->
-    <color name="bg_home">#F0F2FF</color>
-    <color name="bg_history">#F8F9FA</color>
-    <color name="text_history_title">#111111</color>
-    <color name="limit_banner_bg">#EEF2FF</color>
-    <color name="limit_banner_stroke">#C7D2FE</color>
+    <color name="bg_app">#0B1020</color>
+    <color name="bg_home">#0B1020</color>
+    <color name="bg_history">#0B1020</color>
+    <color name="bg_card">#18233D</color>
+    <color name="bg_top_bar">#121A2F</color>
+
+    <color name="surface_base">#121A2F</color>
+    <color name="surface_card">#18233D</color>
+    <color name="surface_elevated">#22304F</color>
+    <color name="surface_header">#0F1730</color>
+    <color name="surface_overlay">#2B3754</color>
+
+    <color name="text_primary">#F5F1E8</color>
+    <color name="text_secondary">#B7C0D4</color>
+    <color name="text_muted">#7F8AA3</color>
+    <color name="text_inverse">#0B1020</color>
+    <color name="text_history_title">#F5F1E8</color>
+
+    <color name="accent_primary">#4C7DFF</color>
+    <color name="accent_primary_strong">#6E96FF</color>
+    <color name="accent_gold">#C7A86A</color>
+    <color name="accent_success">#2FA87F</color>
+    <color name="accent_warning">#D9A441</color>
+    <color name="accent_error">#D96B6B</color>
+
+    <color name="divider_color">#2B3754</color>
+    <color name="card_border">#2B3754</color>
+    <color name="border_subtle">#2B3754</color>
+    <color name="border_strong">#354567</color>
+    <color name="overlay_soft">#33F5F1E8</color>
+    <color name="overlay_faint">#1AF5F1E8</color>
+
+    <color name="input_fill">#141F37</color>
+    <color name="limit_banner_bg">#22304F</color>
+    <color name="limit_banner_stroke">#354567</color>
+
+    <color name="tint_beginner_bg">#132C2B</color>
+    <color name="tint_beginner_fg">#7FE1BE</color>
+    <color name="tint_technical_bg">#162849</color>
+    <color name="tint_technical_fg">#8AB2FF</color>
+    <color name="tint_podcast_bg">#2A2237</color>
+    <color name="tint_podcast_fg">#D7B97D</color>
 </resources>

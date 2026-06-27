@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0D1B4B"
+    android:background="@color/bg_app"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:paddingStart="28dp"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="Analyzing Paper…"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:textSize="22sp"
         android:textStyle="bold"
         android:gravity="center"/>
@@ -48,7 +48,7 @@
         android:layout_marginBottom="28dp"
         android:text="uploaded_file.pdf"
         android:textSize="12sp"
-        android:textColor="#7B8FCC"
+        android:textColor="@color/text_secondary"
         android:gravity="center"/>
 
     <!-- ── STEPS ── -->
@@ -77,7 +77,7 @@
                     android:layout_gravity="center"
                     android:text="1"
                     android:textSize="11sp"
-                    android:textColor="#80FFFFFF"/>
+                    android:textColor="@color/text_muted"/>
             </FrameLayout>
             <TextView
                 android:id="@+id/step1Text"
@@ -86,7 +86,7 @@
                 android:layout_marginStart="14dp"
                 android:text="Extracting text"
                 android:textSize="13sp"
-                android:textColor="#60FFFFFF"/>
+                android:textColor="@color/text_muted"/>
         </LinearLayout>
 
         <!-- Step 2 -->
@@ -109,7 +109,7 @@
                     android:layout_gravity="center"
                     android:text="2"
                     android:textSize="11sp"
-                    android:textColor="#80FFFFFF"/>
+                    android:textColor="@color/text_muted"/>
             </FrameLayout>
             <TextView
                 android:id="@+id/step2Text"
@@ -118,7 +118,7 @@
                 android:layout_marginStart="14dp"
                 android:text="Parsing sections"
                 android:textSize="13sp"
-                android:textColor="#60FFFFFF"/>
+                android:textColor="@color/text_muted"/>
         </LinearLayout>
 
         <!-- Step 3 -->
@@ -141,7 +141,7 @@
                     android:layout_gravity="center"
                     android:text="3"
                     android:textSize="11sp"
-                    android:textColor="#80FFFFFF"/>
+                    android:textColor="@color/text_muted"/>
             </FrameLayout>
             <TextView
                 android:id="@+id/step3Text"
@@ -150,7 +150,7 @@
                 android:layout_marginStart="14dp"
                 android:text="Extracting keywords"
                 android:textSize="13sp"
-                android:textColor="#60FFFFFF"/>
+                android:textColor="@color/text_muted"/>
         </LinearLayout>
 
         <!-- Step 4 -->
@@ -173,7 +173,7 @@
                     android:layout_gravity="center"
                     android:text="4"
                     android:textSize="11sp"
-                    android:textColor="#80FFFFFF"/>
+                    android:textColor="@color/text_muted"/>
             </FrameLayout>
             <TextView
                 android:id="@+id/step4Text"
@@ -182,7 +182,7 @@
                 android:layout_marginStart="14dp"
                 android:text="Building flashcards"
                 android:textSize="13sp"
-                android:textColor="#60FFFFFF"/>
+                android:textColor="@color/text_muted"/>
         </LinearLayout>
 
         <!-- Step 5 -->
@@ -204,7 +204,7 @@
                     android:layout_gravity="center"
                     android:text="5"
                     android:textSize="11sp"
-                    android:textColor="#80FFFFFF"/>
+                    android:textColor="@color/text_muted"/>
             </FrameLayout>
             <TextView
                 android:id="@+id/step5Text"
@@ -213,7 +213,7 @@
                 android:layout_marginStart="14dp"
                 android:text="Finding relevant papers"
                 android:textSize="13sp"
-                android:textColor="#60FFFFFF"/>
+                android:textColor="@color/text_muted"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -238,7 +238,7 @@
         android:layout_marginTop="6dp"
         android:text="0% complete"
         android:textSize="11sp"
-        android:textColor="#7B8FCC"
+        android:textColor="@color/text_secondary"
         android:gravity="center"/>
 
     <!-- ── CONTINUE BUTTON (hidden initially) ── -->
@@ -250,10 +250,10 @@
         android:text="Continue to Summary →"
         android:textAllCaps="false"
         android:textSize="16sp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_primary"
         android:textStyle="bold"
         android:visibility="invisible"
-        app:backgroundTint="#2563EB"
+        app:backgroundTint="@color/accent_primary"
         app:cornerRadius="14dp"
         xmlns:app="http://schemas.android.com/apk/res-auto"/>
 

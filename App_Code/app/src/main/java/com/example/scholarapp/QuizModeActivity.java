@@ -194,7 +194,7 @@ public class QuizModeActivity extends AppCompatActivity {
         TextView tvOption = new TextView(this);
         tvOption.setText(text);
         tvOption.setPadding(dp(14), dp(14), dp(14), dp(14));
-        tvOption.setTextColor(0xFF374151); // #374151
+        tvOption.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
         tvOption.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13f);
         tvOption.setLineSpacing(0, 1.3f);
         
@@ -215,12 +215,12 @@ public class QuizModeActivity extends AppCompatActivity {
             CardView card = (CardView) optionsContainer.getChildAt(i);
             TextView tv = (TextView) card.getChildAt(0);
             if (i == selectedOptionIndex) {
-                card.setCardBackgroundColor(0xFFEDE9FE); // active purple bg
-                tv.setTextColor(0xFF5B21B6);
+                card.setCardBackgroundColor(androidx.core.content.ContextCompat.getColor(this, R.color.surface_elevated));
+                tv.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.accent_gold));
                 tv.setTypeface(null, android.graphics.Typeface.BOLD);
             } else {
-                card.setCardBackgroundColor(0xFFFFFFFF); // default white bg
-                tv.setTextColor(0xFF374151);
+                card.setCardBackgroundColor(androidx.core.content.ContextCompat.getColor(this, R.color.surface_card));
+                tv.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_primary));
                 tv.setTypeface(null, android.graphics.Typeface.NORMAL);
             }
         }
@@ -239,16 +239,16 @@ public class QuizModeActivity extends AppCompatActivity {
             CardView card = (CardView) optionsContainer.getChildAt(i);
             TextView tv = (TextView) card.getChildAt(0);
             if (i == correctIndex) {
-                card.setCardBackgroundColor(0xFFD1FAE5); // soft green
-                tv.setTextColor(0xFF065F46);
+                card.setCardBackgroundColor(androidx.core.content.ContextCompat.getColor(this, R.color.surface_elevated));
+                tv.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.accent_success));
                 tv.setTypeface(null, android.graphics.Typeface.BOLD);
             } else if (i == selectedOptionIndex) {
-                card.setCardBackgroundColor(0xFFFEE2E2); // soft red
-                tv.setTextColor(0xFF991B1B);
+                card.setCardBackgroundColor(androidx.core.content.ContextCompat.getColor(this, R.color.surface_elevated));
+                tv.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.accent_error));
                 tv.setTypeface(null, android.graphics.Typeface.BOLD);
             } else {
-                card.setCardBackgroundColor(0xFFFFFFFF);
-                tv.setTextColor(0xFF9CA3AF); // muted gray
+                card.setCardBackgroundColor(androidx.core.content.ContextCompat.getColor(this, R.color.surface_card));
+                tv.setTextColor(androidx.core.content.ContextCompat.getColor(this, R.color.text_muted));
                 tv.setTypeface(null, android.graphics.Typeface.NORMAL);
             }
         }

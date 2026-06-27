@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9F5FF">
+    android:background="@color/bg_app">
 
     <LinearLayout
         android:id="@+id/headerSection5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#5B21B6"
+        android:background="@color/accent_primary"
         android:orientation="vertical"
         android:paddingStart="18dp"
         android:paddingTop="12dp"
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="←"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="17sp" />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
                 android:text="Quiz Evaluation"
-                android:textColor="#80FFFFFF"
+                android:textColor="@color/text_muted"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Paper Title"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="15sp"
             android:textStyle="bold"
             android:ellipsize="end"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:text="Question 1 of 5"
-            android:textColor="#CCFFFFFF"
+            android:textColor="@color/text_secondary"
             android:textSize="11sp"
             android:textStyle="bold" />
 
@@ -71,7 +71,7 @@
             android:layout_height="5dp"
             android:layout_marginTop="6dp"
             android:progress="20"
-            android:progressTint="#A78BFA" />
+            android:progressTint="@color/accent_primary_strong" />
     </LinearLayout>
 
     <ScrollView
@@ -94,7 +94,7 @@
                 android:layout_marginBottom="16dp"
                 android:lineSpacingExtra="4dp"
                 android:text="Question text goes here..."
-                android:textColor="#0F1117"
+                android:textColor="@color/text_primary"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:visibility="gone"
-                app:cardBackgroundColor="#F3E8FF"
+                app:cardBackgroundColor="@color/surface_elevated"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp">
 
@@ -126,7 +126,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="💡 Explanation"
-                        android:textColor="#6D28D9"
+                        android:textColor="@color/accent_primary"
                         android:textSize="11sp"
                         android:textStyle="bold"
                         android:letterSpacing="0.08"/>
@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:lineSpacingExtra="3dp"
-                        android:textColor="#4C1D95"
+                        android:textColor="@color/accent_primary"
                         android:textSize="12sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -159,9 +159,9 @@
             android:id="@+id/btnSubmitAnswer"
             android:layout_width="match_parent"
             android:layout_height="53dp"
-            android:backgroundTint="#5B21B6"
+            android:backgroundTint="@color/accent_primary"
             android:text="Submit Answer"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="14sp"
             android:textStyle="bold"
             app:cornerRadius="14dp" />
@@ -176,7 +176,7 @@
         android:gravity="center"
         android:letterSpacing="0.08"
         android:text="S13 · QUIZ MODE"
-        android:textColor="#6B7280"
+        android:textColor="@color/text_secondary"
         android:textSize="10sp"
         android:textStyle="bold" />
 

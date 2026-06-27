@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="←"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_primary"
                 android:textSize="20sp" />
         </FrameLayout>
 
@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Coming Soon"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_primary"
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_marginBottom="10dp"
@@ -84,7 +84,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:text="This feature is under development and will be available soon."
-            android:textColor="#CCE0FFFF"
+            android:textColor="@color/text_secondary"
             android:textSize="15sp"
             android:gravity="center"
             android:lineSpacingMultiplier="1.4"
