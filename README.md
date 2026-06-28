@@ -66,10 +66,10 @@ The Android client is a multi-screen research workspace with a polished, animate
 | Authentication | Google sign-in, email/password login, sign-up, password reset |
 | Upload flow | Pick PDFs, show animated upload progress, analyze up to 5 files per session |
 | Reading modes | Beginner mode, technical mode, freeform chat, summary mode, simplifier |
-| Study tools | Flashcards, quiz generation, podcast-style explanation, citations viewer |
-| Research tools | Search papers, trending papers, paper details, paper insights |
-| Review tools | Peer review assistant, reference generation, DOCX/PDF export |
-| Personalization | Home feed, reading history, profile stats, saved paper state |
+| Study tools | Flashcards, quiz generation, spaced-repetition review updates, podcast-style explanation, citations viewer |
+| Research tools | OpenAlex search, trending papers, paper details, paper insights, citation impact meter |
+| Review tools | PDF/DOCX peer review assistant, reference generation, APA/MLA/IEEE/Chicago styles, DOCX/PDF export |
+| Personalization | Home feed, reading history, profile stats, upload counts, saved paper state |
 
 ### Key screens and flows
 
@@ -91,6 +91,7 @@ The Android client is a multi-screen research workspace with a polished, animate
 | Summary | Concise paper summary and overview |
 | Simplifier | Rewrites text for easier understanding |
 | Citations | View formatted citations and download options |
+| Flashcards | Bottom-sheet study cards and quiz handoff |
 | Quiz Mode | Generate multiple-choice comprehension questions |
 | Podcast Flow | Setup, progress, and player screens |
 | Dashboard | Hub for paper tools and research actions |
@@ -107,9 +108,12 @@ The Android client is a multi-screen research workspace with a polished, animate
 - Staggered card entrance animations on the dashboard
 - Scale feedback for tap interactions
 - Firebase-backed user identity and paper state
-- Research history and saved paper tracking
+- Firestore-backed paper history, chat messages, quiz review state, and saved paper tracking
 - Multiple reading modes for different learning styles
 - Integrated paper discovery through OpenAlex
+- Citation score meter with OpenAlex citation lookups
+- Text-to-speech podcast player with foreground media notification controls, transcript navigation, and playback speed selection
+- Reference downloads saved to the device Downloads folder
 
 ## Backend API
 
@@ -118,7 +122,7 @@ The backend lives in `FastAPI_Backend/` and is built with FastAPI.
 | Feature | Description |
 | --- | --- |
 | PDF extraction | Reads uploaded PDFs with `pdfplumber` |
-| DOCX extraction | Reads Word documents without relying on Word-specific desktop tools |
+| DOCX extraction | Reads Word documents for peer-review and reference-generation uploads |
 | AI analysis | Produces structured paper metadata and section content |
 | JSON repair | Repairs malformed AI output before parsing |
 | Firestore fallback | Loads stored paper context when needed |
@@ -140,11 +144,14 @@ The FastAPI backend has been deployed on Vercel.
 
 | Link | URL |
 | --- | --- |
-| Production API | `https://your-vercel-deployment-url.vercel.app` |
-| API docs | `https://your-vercel-deployment-url.vercel.app/docs` |
-| Health check | `https://your-vercel-deployment-url.vercel.app/` |
+| Production API | `https://scholar-ai-backend.vercel.app` |
+| API docs | `https://scholar-ai-backend.vercel.app/docs` |
+| Health check | `https://scholar-ai-backend.vercel.app/` |
 
-Replace the placeholder URL with your actual Vercel production URL.
+The Android source-set network configs currently point to this Vercel deployment in:
+
+- [App_Code/app/src/debug/java/com/example/scholarapp/network/NetworkConfig.java](App_Code/app/src/debug/java/com/example/scholarapp/network/NetworkConfig.java)
+- [App_Code/app/src/release/java/com/example/scholarapp/network/NetworkConfig.java](App_Code/app/src/release/java/com/example/scholarapp/network/NetworkConfig.java)
 
 Expected health check response:
 
@@ -164,7 +171,8 @@ ScholarGit/
 |   `-- app/
 |       |-- build.gradle.kts
 |       |-- google-services.json
-|       `-- src/
+|       |-- src/
+|       `-- scholarfiledirectory/
 `-- FastAPI_Backend/
     |-- main.py
     |-- ai.py
@@ -222,9 +230,9 @@ Open the Android project in Android Studio, then:
 | Android emulator + local backend | `http://10.0.2.2:8000/` |
 | Real device on same Wi-Fi | `http://<your-pc-ip>:8000/` |
 | Public access / testing | `https://<your-ngrok-url>/` |
-| Production app | `https://your-vercel-deployment-url.vercel.app/` |
+| Production app | `https://scholar-ai-backend.vercel.app/` |
 
-If you are using the current debug configuration, remember that the app is pointed at an ngrok URL in the Gradle config, so update it before shipping a release build.
+The active Retrofit base URL comes from `NetworkConfig.API_BASE_URL`. `build.gradle.kts` still contains legacy `BuildConfig.API_BASE_URL` values, but the current `RetrofitClient` reads the source-set `NetworkConfig` class.
 
 ### 4) Vercel deployment
 
@@ -246,6 +254,8 @@ Set `DEEPSEEK_API_KEY` and optional `OPENALEX_API_KEY` in the Vercel project set
 - Firebase Auth and Firestore
 - Retrofit and OkHttp
 - Navigation Fragment
+- Google Sign-In
+- Android media notification support for podcast playback
 
 ### Backend dependencies
 
@@ -296,17 +306,20 @@ Set `DEEPSEEK_API_KEY` and optional `OPENALEX_API_KEY` in the Vercel project set
 | --- | --- |
 | Upload and analyze | Upload PDFs, analyze them, and move into the study pipeline |
 | Home dashboard | Resume recent papers and jump into the correct mode |
+| Dashboard hub | Launch paper understanding, reference generation, peer review, or paper search |
 | Beginner mode | Simple explanations for non-experts |
 | Technical mode | Sectioned, deep-dive academic breakdowns |
 | Chat mode | Ask follow-up questions about the selected paper |
 | Summary mode | Read the paper in a compact overview format |
 | Simplifier | Rephrase dense technical text into easier language |
-| Citations | View extracted citations and reference data |
-| Quiz mode | Reinforce reading with multiple-choice checks |
-| Podcast mode | Turn the paper into an audio-style script and player flow |
-| Search papers | Browse OpenAlex results and trending papers |
-| Peer review | Generate constructive criticism and reviewer questions |
-| References | Generate and export formatted citations |
+| Citations | View extracted citations, citation score, reference data, and DOCX/PDF exports |
+| Flashcards | Review study cards from the selected paper and launch quiz evaluation |
+| Quiz mode | Reinforce reading with multiple-choice checks and Firestore SRS schedule updates |
+| Podcast mode | Turn the paper into an audio-style script with TTS playback, media notification controls, speed controls, and transcript navigation |
+| Search papers | Browse OpenAlex results, trending papers, and detailed paper metadata |
+| Paper insights | Generate findings, applications, limitations, and concise insights from paper metadata |
+| Peer review | Upload PDF/DOCX drafts for constructive criticism, limitations, flaws, and reviewer questions |
+| References | Upload PDF/DOCX drafts, choose APA/MLA/IEEE/Chicago, and export formatted references |
 
 </details>
 
@@ -322,6 +335,7 @@ Set `DEEPSEEK_API_KEY` and optional `OPENALEX_API_KEY` in the Vercel project set
 | Reference export | Produces downloadable DOCX and PDF files |
 | Paper insights | Summarizes title and abstract into practical research notes |
 | Peer review | Returns limitations, flaws, and reviewer questions |
+| DOCX support | Accepts DOCX uploads for peer review and reference generation |
 
 </details>
 
@@ -341,7 +355,7 @@ Set `DEEPSEEK_API_KEY` and optional `OPENALEX_API_KEY` in the Vercel project set
 1. Open the Android project in Android Studio.
 2. Sync Gradle and wait for dependencies to finish.
 3. Confirm `google-services.json` is present.
-4. Update the backend base URL if you are not using the current ngrok address or your Vercel production URL.
+4. Update the backend base URL if you are not using the current Vercel production URL or your own local/test backend.
 5. Run the app on an emulator or physical device.
 
 ### Suggested launch order
@@ -354,6 +368,7 @@ Set `DEEPSEEK_API_KEY` and optional `OPENALEX_API_KEY` in the Vercel project set
 ## Troubleshooting
 
 - If the app cannot reach the backend, check the base URL in the Android config and make sure your server is listening on the right host and port.
+- If the app still calls an old ngrok URL, check both the source-set `NetworkConfig.java` files and any legacy `BuildConfig.API_BASE_URL` values before rebuilding.
 - If PDF analysis fails, confirm the file is a valid PDF and under the app's size limit.
 - If DeepSeek responses fail, verify `DEEPSEEK_API_KEY` in the backend `.env` or Vercel settings.
 - If paper search fails, confirm outbound internet access and optional OpenAlex credentials.
