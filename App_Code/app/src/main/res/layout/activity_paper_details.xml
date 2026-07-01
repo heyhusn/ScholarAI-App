@@ -83,7 +83,8 @@
                     android:textColor="@color/text_secondary"
                     android:textSize="15sp"
                     android:text="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone" />
 
                 <!-- Quick info chips row -->
                 <LinearLayout
@@ -119,7 +120,8 @@
                         android:textStyle="bold"
                         android:textSize="12sp"
                         android:text="2017"
-                        android:layout_marginEnd="8dp" />
+                        android:layout_marginEnd="8dp"
+                        android:visibility="gone" />
 
                     <!-- OA Badge -->
                     <TextView

@@ -101,9 +101,19 @@ public class PaperDetailsActivity extends AppCompatActivity {
 
     private void bindData() {
         tvDetailTitle.setText(paper.getTitle());
-        tvDetailAuthors.setText(paper.getAuthors());
+        if (paper.getAuthors() != null && !paper.getAuthors().trim().isEmpty() && !paper.getAuthors().equalsIgnoreCase("Unknown Authors")) {
+            tvDetailAuthors.setText(paper.getAuthors());
+            tvDetailAuthors.setVisibility(View.VISIBLE);
+        } else {
+            tvDetailAuthors.setVisibility(View.GONE);
+        }
         tvDetailCitations.setText("★ " + paper.getCitationCount() + " citations");
-        tvDetailYear.setText(paper.getYear());
+        if (paper.getYear() != null && !paper.getYear().trim().isEmpty()) {
+            tvDetailYear.setText(paper.getYear());
+            tvDetailYear.setVisibility(View.VISIBLE);
+        } else {
+            tvDetailYear.setVisibility(View.GONE);
+        }
         
         if (paper.isOpenAccess()) {
             tvDetailOA.setVisibility(View.VISIBLE);

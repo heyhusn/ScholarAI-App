@@ -79,9 +79,19 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.PaperViewHol
 
         public void bind(OpenAlexPaper paper, OnPaperClickListener listener) {
             tvTitle.setText(paper.getTitle());
-            tvAuthors.setText(paper.getAuthors());
+            if (paper.getAuthors() != null && !paper.getAuthors().trim().isEmpty() && !paper.getAuthors().equalsIgnoreCase("Unknown Authors")) {
+                tvAuthors.setText(paper.getAuthors());
+                tvAuthors.setVisibility(View.VISIBLE);
+            } else {
+                tvAuthors.setVisibility(View.GONE);
+            }
             tvVenue.setText(paper.getVenue());
-            tvYear.setText(paper.getYear());
+            if (paper.getYear() != null && !paper.getYear().trim().isEmpty()) {
+                tvYear.setText(paper.getYear());
+                tvYear.setVisibility(View.VISIBLE);
+            } else {
+                tvYear.setVisibility(View.GONE);
+            }
             tvCitationBadge.setText("★ " + paper.getCitationCount());
 
             if (paper.getPrimaryTopic() != null && !paper.getPrimaryTopic().isEmpty()) {
